@@ -21,9 +21,37 @@
         .book-card {
             transition: all 0.3s ease;
         }
+
+        /* أنماط زر العودة للأعلى */
+        #back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+        
+        .back-to-top:hover {
+            background-color: #4338CA;
+            transform: translateY(-3px);
+        }
+        
     </style>
 </head>
 <body class="bg-gray-50">
+    <!-- زر العودة للأعلى -->
+    <button id="back-to-top" class="bg-indigo-600 px-5 hover:bg-indigo-700 text-white rounded-full p-3 shadow-lg">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <!-- Header -->
     <header class="bg-white shadow-md pt-4">
         <div class="container mx-auto px-4 py-3">
@@ -445,5 +473,6 @@
         });
     </script>
     <script src="java.js"></script>
+    
 </body>
 </html>
