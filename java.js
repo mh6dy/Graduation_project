@@ -76,3 +76,41 @@ backToTopButton.addEventListener('click', function() {
         behavior: 'smooth'
     });
 });
+
+// تغير مكان تسجيل الدخول والعكس 
+const loginButton = document.getElementById('login-tab');
+const registerButton = document.getElementById('register-tab');
+const loginform = document.getElementById('login-form');
+const registerform = document.getElementById('register-form');
+
+loginButton.addEventListener('click', function() {
+
+    loginButton.classList.remove('border-gray-200');
+    loginButton.classList.remove('text-gray-500');
+    loginButton.classList.add('border-[#ff9c00]');
+    loginButton.classList.add('text-[#ff9c00]');
+    
+    registerButton.classList.remove('border-[#ff9c00]');
+    registerButton.classList.remove('text-[#ff9c00]');
+    registerButton.classList.add('border-gray-200');
+    registerButton.classList.add('text-gray-500');
+
+    registerform.classList.add('hidden');
+    loginform.classList.remove('hidden');
+});
+
+registerButton.addEventListener('click', function() {
+
+    registerButton.classList.remove('border-gray-200');
+    registerButton.classList.remove('text-gray-500');
+    registerButton.classList.add('border-[#ff9c00]');
+    registerButton.classList.add('text-[#ff9c00]');
+    
+    loginButton.classList.remove('border-[#ff9c00]');
+    loginButton.classList.remove('text-[#ff9c00]');
+    loginButton.classList.add('border-gray-200');
+    loginButton.classList.add('text-gray-500');
+
+    loginform.classList.add('hidden');
+    registerform.classList.remove('hidden');
+});
