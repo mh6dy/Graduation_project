@@ -114,3 +114,16 @@ registerButton.addEventListener('click', function() {
     loginform.classList.add('hidden');
     registerform.classList.remove('hidden');
 });
+
+function loader() {
+    document.querySelector('.loader-container').classList.add('active');
+  }
+  
+  function fadeOut() {
+    setTimeout(loader, 4000); // تفعيل دالة loader بعد 4 ثواني
+  }
+  
+  // لتشغيل الـ loader عند تحميل الصفحة
+  window.onload = fadeOut;
+  
+  
