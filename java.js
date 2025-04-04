@@ -147,18 +147,17 @@ function loader() {
  // Intersection Observer for robot animation
  document.addEventListener('DOMContentLoaded', function() {
     const robotImage = document.querySelector('.robot-animation');
-    const robotBg = document.querySelector('.robot-bg');
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 // Element is in view - show the robot with animation
                 robotImage.classList.add('show');
-                robotBg.classList.add('show');
+                
             } else {
                 // Element is out of view - hide the robot
                 robotImage.classList.remove('show');
-                robotBg.classList.remove('show');
+                
             }
         });
     }, {
