@@ -138,6 +138,60 @@
         </div>
     </header>
     
+    <!-- Modal del chat -->
+<div id="chatModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-xl mx-4 h-[500px] flex flex-col">
+        <!-- Encabezado del chat -->
+        <div class="p-4 bg-[#ff9c00] text-white rounded-t-lg flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="img_book/Graident Ai Robot.svg" alt="MaSa AI" class="w-10 h-10 ml-2">
+                <h3 class="text-xl font-bold">محادثة مع MaSa AI</h3>
+            </div>
+            <button id="closeChat" class="text-white hover:text-gray-300">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- Área de mensajes -->
+        <div id="chatMessages" class="flex-1 overflow-y-auto p-4 bg-gray-50">
+            <!-- Mensaje de bienvenida del robot -->
+            <div class="flex mb-4">
+                <div class="w-8 h-8 rounded-full bg-[#ff9c00] flex items-center justify-center ml-2">
+                    <i class="fas fa-robot text-white"></i>
+                </div>
+                <div class="bg-white p-3 rounded-lg shadow max-w-xs md:max-w-md">
+                    <p>مرحباً بك! أنا MaSa AI، مساعدك الذكي. كيف يمكنني مساعدتك اليوم؟</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Área de opciones de preguntas predefinidas -->
+        <div class="p-4 bg-gray-100 border-t border-gray-200">
+            <div class="text-sm text-gray-600 mb-2">اختر سؤالاً أو اكتب سؤالك الخاص:</div>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <button class="predefined-question bg-[#fff2d9] hover:bg-[#ffead0] text-gray-800 px-3 py-2 rounded-lg text-sm">
+                    ماذا تقدم المكتبة الإلكترونية؟
+                </button>
+                <button class="predefined-question bg-[#fff2d9] hover:bg-[#ffead0] text-gray-800 px-3 py-2 rounded-lg text-sm">
+                    ما هي الأقسام الموجودة في المكتبة؟
+                </button>
+                <button class="predefined-question bg-[#fff2d9] hover:bg-[#ffead0] text-gray-800 px-3 py-2 rounded-lg text-sm">
+                    هل يمكنك اقتراح كتب للقراءة؟
+                </button>
+            </div>
+            
+            <!-- Área de entrada de texto -->
+            <div class="flex">
+                <input type="text" id="userMessage" placeholder="اكتب رسالتك هنا..." 
+                       class="flex-1 px-4 py-2 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#ff9c00]">
+                <button id="sendMessage" class="bg-[#ff9c00] text-white px-4 py-2 rounded-l-lg hover:bg-[#e68b00]">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
     <!-- Login/Register Modal -->
     <div id="loginn" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 fade-in">

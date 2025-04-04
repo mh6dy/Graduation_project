@@ -171,3 +171,112 @@ registerButton.addEventListener('click', function() {
         observer.observe(robotImage.parentElement);
     }
 });
+
+// Script para la funcionalidad del chat
+document.addEventListener('DOMContentLoaded', function() {
+    // Elementos del DOM
+    const chatModal = document.getElementById('chatModal');
+    const closeChat = document.getElementById('closeChat');
+    const chatMessages = document.getElementById('chatMessages');
+    const userMessageInput = document.getElementById('userMessage');
+    const sendMessageBtn = document.getElementById('sendMessage');
+    const predefinedQuestions = document.querySelectorAll('.predefined-question');
+    
+    // Vincular el botón "تحدث مع MaSa AI الآن" para abrir el chat
+    const openChatButton = document.querySelector('a[href="masa-ai.html"]');
+    if (openChatButton) {
+        openChatButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            chatModal.classList.remove('hidden');
+        });
+    }
+    
+    // Cerrar el chat
+    closeChat.addEventListener('click', function() {
+        chatModal.classList.add('hidden');
+    });
+    
+    // Función para añadir un mensaje del usuario
+    function addUserMessage(message) {
+        const messageElement = document.createElement('div');
+        messageElement.className = 'flex mb-4 justify-end';
+        messageElement.innerHTML = `
+            <div class="bg-[#ff9c00] p-3 rounded-lg shadow max-w-xs md:max-w-md text-white">
+                <p>${message}</p>
+            </div>
+            <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center mr-2">
+                <i class="fas fa-user text-white"></i>
+            </div>
+        `;
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Función para añadir una respuesta del robot
+    function addBotResponse(message) {
+        // Simular retraso en la respuesta para dar un efecto más realista
+        setTimeout(() => {
+            const messageElement = document.createElement('div');
+            messageElement.className = 'flex mb-4';
+            messageElement.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-[#ff9c00] flex items-center justify-center ml-2">
+                    <i class="fas fa-robot text-white"></i>
+                </div>
+                <div class="bg-white p-3 rounded-lg shadow max-w-xs md:max-w-md">
+                    <p>${message}</p>
+                </div>
+            `;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 600);
+    }
+    
+    // Función para procesar el mensaje del usuario y obtener una respuesta
+    function processUserMessage(message) {
+        let response = '';
+        
+        // Respuestas predefinidas basadas en palabras clave
+        if (message.includes('تقدم المكتبة') || message.includes('ماذا تقدم')) {
+            response = 'تقدم المكتبة الإلكترونية مجموعة متنوعة من الكتب في مختلف المجالات مثل الروايات، العلوم، التاريخ، الفلسفة وغيرها. يمكنك قراءة الكتب مباشرة عبر الإنترنت أو تنزيلها للقراءة لاحقاً. كما توفر المكتبة خدمات مثل البحث المتقدم، توصيات القراءة، وتتبع تقدم القراءة.';
+        } 
+        else if (message.includes('الأقسام') || message.includes('التصنيفات')) {
+            response = 'تتضمن المكتبة الإلكترونية العديد من الأقسام والتصنيفات مثل: الروايات، العلوم، التاريخ، الفلسفة، علم النفس، التطوير الذاتي، الأدب، الدين، السياسة، والكثير غيرها. يمكنك تصفح هذه الأقسام من خلال صفحة التصنيفات.';
+        }
+        else if (message.includes('اقتراح') || message.includes('كتب للقراءة')) {
+            response = 'بالتأكيد! يمكنني اقتراح بعض الكتب بناءً على اهتماماتك. من أحدث الإضافات لدينا: "تحت أجنحة البرزخ" للكاتب عبد الرزاق الحجامي، "السباحة عكس التيار" للسيد محسن المدرسي، "فلسفتنا" للسيد محمد باقر الصدر. هل تبحث عن موضوع معين؟';
+        }
+        else {
+            response = 'شكراً لسؤالك! يمكنني مساعدتك في العثور على الكتب، اقتراح قراءات مناسبة، أو الإجابة على استفساراتك حول محتوى المكتبة. هل يمكنني مساعدتك بشيء آخر؟';
+        }
+        
+        return response;
+    }
+    
+    // Evento para el botón de enviar mensaje
+    sendMessageBtn.addEventListener('click', function() {
+        const message = userMessageInput.value.trim();
+        if (message) {
+            addUserMessage(message);
+            const response = processUserMessage(message);
+            addBotResponse(response);
+            userMessageInput.value = '';
+        }
+    });
+    
+    // Permitir enviar mensaje con Enter
+    userMessageInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendMessageBtn.click();
+        }
+    });
+    
+    // Eventos para las preguntas predefinidas
+    predefinedQuestions.forEach(button => {
+        button.addEventListener('click', function() {
+            const questionText = this.textContent.trim();
+            addUserMessage(questionText);
+            const response = processUserMessage(questionText);
+            addBotResponse(response);
+        });
+    });
+});
