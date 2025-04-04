@@ -4,10 +4,13 @@ document.addEventListener('DOMContentLoaded', function() {
   // الحصول على روابط الكتب والتصنيفات من شريط التنقل
   const booksLink = document.querySelector('nav ul li:nth-child(2) a');
   const categoriesLink = document.querySelector('nav ul li:nth-child(3) a');
+  const MaSaLink = document.querySelector('nav ul li:nth-child(4) a');
+  
   
   // الحصول على قسم أحدث الإضافات
   const latestBooksSection = document.querySelector('section:nth-of-type(2)');
-  const categories = document.querySelector('section:nth-of-type(4)');
+  const MaSaLSection = document.querySelector('section:nth-of-type(4)');
+  const categories = document.querySelector('section:nth-of-type(5)');
   
   // إضافة مستمع حدث للنقر على رابط "الكتب"
   if (booksLink) {
@@ -21,17 +24,29 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
   
-  // إضافة مستمع حدث للنقر على رابط "التصنيفات"
-  if (categoriesLink) {
-      categoriesLink.addEventListener('click', function(e) {
+  // إضافة مستمع حدث للنقر على رابط "تحدث مع MaSa AI"
+  if (MaSaLink) {
+    MaSaLink.addEventListener('click', function(e) {
           e.preventDefault(); // منع السلوك الافتراضي للرابط
           
           // التمرير بسلاسة إلى قسم أحدث الإضافات
-          categories.scrollIntoView({ 
+          MaSaLSection.scrollIntoView({ 
               behavior: 'smooth' 
           });
       });
   }
+
+    // إضافة مستمع حدث للنقر على رابط "التصنيفات"
+    if (categoriesLink) {
+        categoriesLink.addEventListener('click', function(e) {
+            e.preventDefault(); // منع السلوك الافتراضي للرابط
+            
+            // التمرير بسلاسة إلى قسم أحدث الإضافات
+            categories.scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        });
+    }
   
   // إضافة وظيفة تسجيل الدخول الموجودة (للحفاظ على الوظائف الموجودة)
   const showLoginButtons = document.querySelectorAll('#showLogin');
@@ -115,15 +130,43 @@ registerButton.addEventListener('click', function() {
     registerform.classList.remove('hidden');
 });
 
-function loader() {
-    document.querySelector('.loader-container').classList.add('active');
-  }
+// function loader() {
+//     document.querySelector('.loader-container').classList.add('active');
+//   }
   
-  function fadeOut() {
-    setTimeout(loader, 4000); // تفعيل دالة loader بعد 4 ثواني
-  }
+//   function fadeOut() {
+//     setTimeout(loader, 4000); // تفعيل دالة loader بعد 4 ثواني
+//   }
   
-  // لتشغيل الـ loader عند تحميل الصفحة
-  window.onload = fadeOut;
+//   // لتشغيل الـ loader عند تحميل الصفحة
+//   window.onload = fadeOut;
   
   
+
+ // Intersection Observer for robot animation
+ document.addEventListener('DOMContentLoaded', function() {
+    const robotImage = document.querySelector('.robot-animation');
+    const robotBg = document.querySelector('.robot-bg');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Element is in view - show the robot with animation
+                robotImage.classList.add('show');
+                robotBg.classList.add('show');
+            } else {
+                // Element is out of view - hide the robot
+                robotImage.classList.remove('show');
+                robotBg.classList.remove('show');
+            }
+        });
+    }, {
+        // Trigger when at least 30% of the element is visible
+        threshold: 0.3
+    });
+    
+    // Start observing the robot image
+    if (robotImage) {
+        observer.observe(robotImage.parentElement);
+    }
+});
