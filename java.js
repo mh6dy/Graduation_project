@@ -9,8 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // الحصول على قسم أحدث الإضافات
   const latestBooksSection = document.querySelector('section:nth-of-type(2)');
-  const MaSaLSection = document.querySelector('section:nth-of-type(4)');
-  const categories = document.querySelector('section:nth-of-type(5)');
+  const categories = document.querySelector('section:nth-of-type(4)');
+  const MaSaLSection = document.querySelector('section:nth-of-type(5)');
+  
   
   // إضافة مستمع حدث للنقر على رابط "الكتب"
   if (booksLink) {
