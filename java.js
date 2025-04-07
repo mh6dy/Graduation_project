@@ -48,6 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // hello
   
   // إضافة وظيفة تسجيل الدخول الموجودة (للحفاظ على الوظائف الموجودة)
   const showLoginButtons = document.querySelectorAll('#showLogin');
