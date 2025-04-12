@@ -346,7 +346,7 @@ function showProfileModal(user) {
             </div>
             
             <div class="flex flex-col items-center p-6">
-                <div class="w-24 h-24 rounded-full bg-[#ff9c00] flex items-center justify-center text-white text-4xl mb-4">
+                <div class="w-24 h-24 rounded-full  bg-blue-800 flex items-center justify-center text-white text-4xl mb-4">
                     <i class="fas fa-user"></i>
                 </div>
                 <h2 class="text-2xl font-bold text-center mb-2">${user.fullName}</h2>
@@ -359,7 +359,7 @@ function showProfileModal(user) {
                     </div>
                     
                     <div class="border-t border-gray-200 pt-4">
-                        <button id="edit-profile" class="w-full bg-[#ff9c00] hover:bg-[#e68b00] text-white font-medium py-2 rounded-lg transition-colors duration-200">
+                        <button id="edit-profile" class="w-full bg-blue-800 hover:bg-blue-900 text-white font-medium py-2 rounded-lg transition-colors duration-200">
                             تعديل الملف الشخصي
                         </button>
                     </div>

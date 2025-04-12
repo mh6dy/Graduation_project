@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -13,17 +14,33 @@
             font-family: 'Tajawal', sans-serif;
         }
 
-        .book-card:hover {
+         /* إضافة أنماط للـ Header الثابت */
+         header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000; /* لضمان ظهور الـ Header فوق العناصر الأخرى */
+            background-color: white;
+        }
+        
+        /* إضافة مساحة في أعلى body لتجنب اختفاء المحتوى تحت الـ Header */
+        body {
+            padding-top: 80px; /* يجب ضبط هذه القيمة بناءً على ارتفاع الـ Header الخاص بك */
+        }
+    
+    .book-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .book-card {
+    }
+    
+    .book-card {
             transition: all 0.3s ease;
-        }
-
+    }
+    
         /* أنماط زر العودة للأعلى */
-        #back-to-top {
+    #back-to-top {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -31,42 +48,42 @@
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
-}
-
-#back-to-top.show {
+    }
+    
+    #back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+        
+    .back-to-top:hover {
+            background-color: #1e40af;
+            transform: translateY(-3px);
+    }
+    
+    .loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10000;
+    background: #fbfbfb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     opacity: 1;
     visibility: visible;
-}
-
-        
-        .back-to-top:hover {
-            background-color: #e68b00;
-            transform: translateY(-3px);
-        }
-
-        .loader-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 10000;
-  background: #fbfbfb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 1s ease, visibility 1s ease;
-}
-
-.loader-container.active {
-  opacity: 0;
-  visibility: hidden;
-}
-
-  /* Robot animation styles */
-  .robot-animation {
+    transition: opacity 1s ease, visibility 1s ease;
+    }
+    
+    .loader-container.active {
+    opacity: 0;
+    visibility: hidden;
+    }
+    
+    /* Robot animation styles */
+    .robot-animation {
         transition: transform 1.2s ease-out, opacity 1s ease-in;
     }
     
@@ -75,114 +92,256 @@
         opacity: 1;
     }
     
-
+    /* .shelf-wrapper {
+      position: relative;
+      margin-bottom: 100px;
+      padding-bottom: 80px; /* ارتفاع الرف */
+    } */
     
-        
+    .shelf-img {
+      position: absolute;
+      bottom: 10;
+      left: 0;
+      width: 100%;
+      
+      object-fit: cover;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    .books-slider {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      /* padding-bottom: 20px; لتفادي لمس الرف */
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      z-index: 10;
+      position: relative;
+      touch-action: pan-x;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .books-slider::-webkit-scrollbar {
+      display: none; /* إخفاء الشريط */
+    }
+    
+    .book-card {
+    flex: 0 0 auto;
+    width: 90px; /* بدل 140 أو 200 */
+    scroll-snap-align: start;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    z-index: 10;
+    }
+    
+    .book-img {
+    height: 180px; /* بدل 280 */
+    width: 100%;
+    object-fit: cover;
+    }
+    
+    
+    .book-card:hover {
+      transform: translateY(-10px) rotate(1deg);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    }
+    
+    /* أنماط أزرار التنقل */
+    .nav-arrow {
+      position: absolute;
+      top: 40%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 20;
+      transition: all 0.3s ease;
+    }
+    
+   
+    .nav-arrow-right {
+      right: 110px;
+    }
+    
+    .nav-arrow-left {
+      left: 95px;
+    }
+    
+    .shelf-container {
+      position: relative;
+    }
+
+    /* أنماط جديدة لعناوين الأقسام */
+    .section-title {
+        position: relative;
+        display: inline-block;
+        padding-right: 1.5rem;
+        margin-bottom: 1.5rem;
+        font-weight: bold;
+        color: #1e3a8a;
+    }
+
+    .section-title::before {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 5px;
+        height: 25px;
+        background-color: #1e40af;
+        border-radius: 3px;
+    }
+
+   
+
+    .section-title-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 50px;
+    }
+
+    .section-title-line {
+        flex-grow: 1;
+        height: 2px;
+        margin-bottom:15px;
+        background: linear-gradient(to left, #1e40af, transparent);
+        margin-right: 1rem;
+    }
+
+    /* أيقونات الأقسام */
+    .section-icon {
+        margin-left: 0.5rem;
+        color: #1e40af;
+    }
+
+    body.dark-mode #user-menu {
+    background-color: #1f2937 !important;
+    color: #f3f4f6 !important;
+}
+
+body.dark-mode #user-menu .text-gray-700 {
+    color: #f3f4f6 !important;
+}
+
+body.dark-mode #user-menu .text-gray-500 {
+    color: #9ca3af !important;
+}
+
+body.dark-mode #user-menu .hover\\:bg-gray-100:hover {
+    background-color: #374151 !important;
+}
+
+body.dark-mode #profile-modal .bg-white {
+    background-color: #1f2937 !important;
+}
+
+body.dark-mode #profile-modal .text-gray-700,
+body.dark-mode #profile-modal .text-gray-600,
+body.dark-mode #profile-modal .text-gray-500 {
+    color: #e5e7eb !important;
+}
+
     </style>
 </head>
 <body class="bg-gray-50">
     <!-- زر العودة للأعلى -->
-    <button id="back-to-top" class="bg-[#ff9c00] px-5 hover:bg-[#e68b00] text-white rounded-full p-3 shadow-lg">
+    <button id="back-to-top" class="bg-blue-800 px-5 hover:bg-blue-900 text-white rounded-full p-3 shadow-lg">
         <i class="fas fa-arrow-up"></i>
     </button>
 
     <!-- Header -->
-    <header class="bg-white shadow-md pt-4">
+    <header class="bg-blue-800 shadow-md px-6 pt-4">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-4 space-x-reverse">
-                    <a href="digital-library-homepage.html" class="text-2xl font-bold text-[#ff9c00]">
+                    <a href="digital-library-homepage.html" class="text-2xl font-bold text-white">
                         <i class="fas fa-book-open ml-2"></i>
                         المكتبة الرقمية</a>
                 </div>
                 
-                <!-- <div class="relative w-1/3">
-
-                    <input type="text" placeholder="ابحث عن كتاب، مؤلف أو موضوع..." 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff9c00]">
-                    <button class="absolute left-3 top-2.5 text-gray-500">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div> -->
-                
-                
-
                 <!-- Navigation -->
-            <nav class=" flex justify-center">
-                <ul class="flex space-x-6 space-x-reverse">
-                    <li><a href="digital-library-homepage.html" class="text-[#ff9c00] font-medium">الرئيسية</a></li>
-                    <li><a href="categories.html?cat=novels" class="text-gray-600 hover:text-[#ff9c00]"> الكتب</a></li>
-                    <li><a href="categories.html?cat=novels" class="text-gray-600 hover:text-[#ff9c00]"> التصنيفات</a></li>
-                    <li><a href="masa-ai.html?cat=novels" class="text-gray-600 hover:text-[#ff9c00]"> تحدث مع MaSa AI</a></li>
-                    <li><a href="advanced-search.html" class="text-gray-600 hover:text-[#ff9c00]"> من نحن ؟ </a></li>
-                </ul>
-            </nav>
+                <nav class="flex justify-center">
+                    <ul class="flex space-x-6 space-x-reverse">
+                        <li><a href="digital-library-homepage.html" class="text-white font-medium">الرئيسية</a></li>
+                        <li><a href="categories.html?cat=novels" class="text-blue-200 hover:text-white"> الكتب</a></li>
+                        <li><a href="categories.html?cat=novels" class="text-blue-200 hover:text-white"> المراحل</a></li>
+                        <li><a href="masa-ai.html?cat=novels" class="text-blue-200 hover:text-white"> تحدث مع MaSa AI</a></li>
+                        <li><a href="advanced-search.html" class="text-blue-200 hover:text-white"> من نحن ؟ </a></li>
+                    </ul>
+                </nav>
 
-            <div class="flex items-center space-x-4 space-x-reverse">
-                <!-- <a id="showLogin" class="text-gray-600 hover:cursor-pointer hover:text-[#ff9c00]"><i class="fas fa-user ml-2"></i>تسجيل الدخول</a> -->
-                <a id="showLogin" class="bg-[#ff9c00] hover:cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-[#e68b00]">تسجيل الدخول </a>
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <button id="darkModeToggle" class="text-white bg-blue-700 hover:bg-blue-600 p-2 rounded-full">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a id="showLogin" class="bg-white text-blue-800 hover:cursor-pointer px-4 py-2 rounded-lg hover:bg-gray-100">تسجيل الدخول </a>
+                </div>
             </div>
-
-            </div>
-            
-            
-            
         </div>
     </header>
     
     <!-- Modal del chat -->
-<div id="chatModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
-    <div class="bg-white rounded-lg shadow-xl w-full max-w-xl mx-4 h-[500px] flex flex-col">
-        <!-- Encabezado del chat -->
-        <div class="p-4 bg-[#ff9c00] text-white rounded-t-lg flex justify-between items-center">
-            <div class="flex items-center">
-                <img src="img_book/Graident Ai Robot.svg" alt="MaSa AI" class="w-10 h-10 ml-2">
-                <h3 class="text-xl font-bold">محادثة مع MaSa AI</h3>
-            </div>
-            <button id="closeChat" class="text-white hover:text-gray-300">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        
-        <!-- Área de mensajes -->
-        <div id="chatMessages" class="flex-1 overflow-y-auto p-4 bg-gray-50">
-            <!-- Mensaje de bienvenida del robot -->
-            <div class="flex mb-4">
-                <div class="w-8 h-8 rounded-full bg-[#ff9c00] flex items-center justify-center ml-2">
-                    <i class="fas fa-robot text-white"></i>
+    <div id="chatModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-xl mx-4 h-[500px] flex flex-col">
+            <!-- Encabezado del chat -->
+            <div class="p-4 bg-blue-800 text-slate-50  rounded-t-lg flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="img_book/Graident Ai Robot.svg" alt="MaSa AI" class="w-10 h-10 ml-2">
+                    <h3 class="text-xl font-bold">محادثة مع MaSa AI</h3>
                 </div>
-                <div class="bg-white p-3 rounded-lg shadow max-w-xs md:max-w-md">
-                    <p>مرحباً بك! أنا MaSa AI، مساعدك الذكي. كيف يمكنني مساعدتك اليوم؟</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Área de opciones de preguntas predefinidas -->
-        <div class="p-4 bg-gray-100 border-t border-gray-200">
-            <div class="text-sm text-gray-600 mb-2">اختر سؤالاً أو اكتب سؤالك الخاص:</div>
-            <div class="flex flex-wrap gap-2 mb-4">
-                <button class="predefined-question bg-[#fff2d9] hover:bg-[#ffead0] text-gray-800 px-3 py-2 rounded-lg text-sm">
-                    ماذا تقدم المكتبة الإلكترونية؟
-                </button>
-                <button class="predefined-question bg-[#fff2d9] hover:bg-[#ffead0] text-gray-800 px-3 py-2 rounded-lg text-sm">
-                    ما هي الأقسام الموجودة في المكتبة؟
-                </button>
-                <button class="predefined-question bg-[#fff2d9] hover:bg-[#ffead0] text-gray-800 px-3 py-2 rounded-lg text-sm">
-                    هل يمكنك اقتراح كتب للقراءة؟
+                <button id="closeChat" class="text-white hover:text-gray-300">
+                    <i class="fas fa-times"></i>
                 </button>
             </div>
             
-            <!-- Área de entrada de texto -->
-            <div class="flex">
-                <input type="text" id="userMessage" placeholder="اكتب رسالتك هنا..." 
-                       class="flex-1 px-4 py-2 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#ff9c00]">
-                <button id="sendMessage" class="bg-[#ff9c00] text-white px-4 py-2 rounded-l-lg hover:bg-[#e68b00]">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
+            <!-- Área de mensajes -->
+            <div id="chatMessages" class="flex-1 overflow-y-auto p-4 bg-gray-50">
+                <!-- Mensaje de bienvenida del robot -->
+                <div class="flex mb-4">
+                    <div class="w-8 h-8 rounded-full bg-blue-800 flex items-center justify-center ml-2">
+                        <i class="fas fa-robot text-white"></i>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg shadow max-w-xs md:max-w-md">
+                        <p>مرحباً بك! أنا MaSa AI، مساعدك الذكي. كيف يمكنني مساعدتك اليوم؟</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Área de opciones de preguntas predefinidas -->
+            <div class="p-4 bg-gray-100 border-t border-gray-200">
+                <div class="text-sm text-gray-600 mb-2">اختر سؤالاً أو اكتب سؤالك الخاص:</div>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <button class="predefined-question bg-blue-200 hover:bg-blue-200 text-gray-900 px-3 py-2 rounded-lg text-sm">
+                        ماذا تقدم المكتبة الإلكترونية؟
+                    </button>
+                    <button class="predefined-question bg-blue-200 hover:bg-blue-200 text-gray-900 px-3 py-2 rounded-lg text-sm">
+                        ما هي الأقسام الموجودة في المكتبة؟
+                    </button>
+                    <button class="predefined-question bg-blue-200 hover:bg-blue-200 text-gray-900 px-3 py-2 rounded-lg text-sm">
+                        هل يمكنك اقتراح كتب للقراءة؟
+                    </button>
+                </div>
+                
+                <!-- Área de entrada de texto -->
+                <div class="flex">
+                    <input type="text" id="userMessage" placeholder="اكتب رسالتك هنا..." 
+                        class="flex-1 px-4 py-2 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-blue-800">
+                    <button id="sendMessage" class="bg-blue-800 text-white px-4 py-2 rounded-l-lg hover:bg-blue-900">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <!-- Login/Register Modal -->
     <div id="loginn" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
@@ -194,7 +353,7 @@
             </div>
 
             <div class="flex">
-                <button id="login-tab" class="w-1/2 py-4 text-center font-medium border-b-2 border-[#ff9c00] text-[#ff9c00]">تسجيل الدخول</button>
+                <button id="login-tab" class="w-1/2 py-4 text-center font-medium border-b-2 border-blue-800 text-blue-800">تسجيل الدخول</button>
                 <button id="register-tab" class="w-1/2 py-4 text-center font-medium border-b-2 border-gray-200 text-gray-500">إنشاء حساب</button>
             </div>
             
@@ -202,30 +361,30 @@
             <div id="login-form" class="p-6 ">
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني</label>
-                    <input type="email" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#ff9c00] focus:border-[#ff9c00]" placeholder="أدخل البريد الإلكتروني">
+                    <input type="email" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:border-blue-800" placeholder="أدخل البريد الإلكتروني">
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-1">كلمة المرور</label>
-                    <input type="password" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#ff9c00] focus:border-[#ff9c00]" placeholder="أدخل كلمة المرور">
+                    <input type="password" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:border-blue-800" placeholder="أدخل كلمة المرور">
                 </div>
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center">
                         <input type="checkbox" id="remember-me" class="ml-2">
                         <label for="remember-me" class="text-sm text-gray-600">تذكرني</label>
                     </div>
-                    <a href="#" class="text-sm text-[#ff9c00] hover:underline">نسيت كلمة المرور؟</a>
+                    <a href="#" class="text-sm text-blue-800 hover:underline">نسيت كلمة المرور؟</a>
                 </div>
-                <button class="w-full bg-[#ff9c00] hover:bg-[#e68b00] text-white font-medium py-2 rounded-lg transition-colors duration-200">تسجيل الدخول</button>
+                <button class="w-full bg-blue-800 hover:bg-blue-900 text-slate-50 font-medium py-2 rounded-lg transition-colors duration-200">تسجيل الدخول</button>
                 <div class="mt-4 text-center">
                     <span class="text-sm text-gray-600">أو تسجيل الدخول باستخدام</span>
                     <div class="flex justify-center mt-2 space-x-4 space-x-reverse">
-                        <button class="bg-[#3b5998] text-white p-2 rounded-full w-10 h-10 flex items-center justify-center">
+                        <button class="bg-[#3b5998] text-slate-50  p-2 rounded-full w-10 h-10 flex items-center justify-center">
                             <i class="fab fa-facebook-f"></i>
                         </button>
-                        <button class="bg-[#1da1f2] text-white p-2 rounded-full w-10 h-10 flex items-center justify-center">
+                        <button class="bg-[#1da1f2] text-slate-50  p-2 rounded-full w-10 h-10 flex items-center justify-center">
                             <i class="fab fa-twitter"></i>
                         </button>
-                        <button class="bg-[#db4437] text-white p-2 rounded-full w-10 h-10 flex items-center justify-center">
+                        <button class="bg-[#db4437] text-slate-50  p-2 rounded-full w-10 h-10 flex items-center justify-center">
                             <i class="fab fa-google"></i>
                         </button>
                     </div>
@@ -236,21 +395,21 @@
             <div id="register-form" class="p-6 hidden ">
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-1">الاسم الكامل</label>
-                    <input type="text" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#ff9c00] focus:border-[#ff9c00]" placeholder="أدخل الاسم الكامل">
+                    <input type="text" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:border-blue-800" placeholder="أدخل الاسم الكامل">
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني</label>
-                    <input type="email" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#ff9c00] focus:border-[#ff9c00]" placeholder="أدخل البريد الإلكتروني">
+                    <input type="email" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:border-blue-800" placeholder="أدخل البريد الإلكتروني">
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-1">كلمة المرور</label>
-                    <input type="password" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#ff9c00] focus:border-[#ff9c00]" placeholder="أدخل كلمة المرور">
+                    <input type="password" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:border-blue-800" placeholder="أدخل كلمة المرور">
                 </div>
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-gray-700 mb-1">تأكيد كلمة المرور</label>
-                    <input type="password" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#ff9c00] focus:border-[#ff9c00]" placeholder="أعد إدخال كلمة المرور">
+                    <input type="password" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:border-blue-800" placeholder="أعد إدخال كلمة المرور">
                 </div>
-                <button class="w-full bg-[#ff9c00] hover:bg-[#e68b00] text-white font-medium py-2 rounded-lg transition-colors duration-200">إنشاء حساب</button>
+                <button class="w-full bg-blue-800 hover:bg-blue-900 text-white font-medium py-2 rounded-lg transition-colors duration-200">إنشاء حساب</button>
             </div>
             
             
@@ -258,237 +417,189 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="bg-amber-50 py-12">
+    <section class="bg-blue-50 py-12">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-8 md:mb-0">
-                    <h1 class="text-4xl font-bold text-gray-800 mb-4">أهلا وسهلاً بكم في  مكتبتنا الرقمية</h1>
-                    <p class="text-lg max-w-lg text-gray-600 mb-6">آلاف الكتب في مختلف المجالات متاحة للقراءة والتنزيل مع تجربة قراءة سلسة ومتميزة</p>
+                <div class="md:w-1/2 mb-8 md:mb-0 mr-12">
+                    <h1 class="text-4xl font-bold text-gray-800 mb-4">مرحباً بك في عالم المعرفة الرقمية لعلوم الحاسوب!</h1>
+                    <p class="text-xl max-w-2xl text-gray-600 mb-6">استعد لاكتشاف كنز من الكتب والمراجع المتميزة في البرمجة، الخوارزميات، الذكاء الاصطناعي، وأكثر من ذلك بكثير , كل ما تحتاجه لتطوير مهاراتك وتجديد شغفك بالتقنية... تجده هنا!</p>
                     <div class="flex space-x-4 space-x-reverse">
-                        <a href="categories.html" class="bg-[#ff9c00] text-white px-6 py-3 rounded-lg hover:bg-[#e68b00]">
+                        <a href="categories.html" class="bg-blue-800 text-white px-6 py-3 rounded-lg hover:bg-blue-900">
                             تصفح الكتب
                         </a>
-                        <!-- <button id="showLogin" class="border border-[#ff9c00] text-[#ff9c00] px-6 py-3 rounded-lg hover:bg-amber-50">
-                            إنشاء حساب
-                        </button> -->
+                        
                     </div>
                 </div>
-                <div class="md:w-1/2">
-                    <img src="img_book/caver.gif" alt="مكتبة رقمية" class="rounded-lg shadow-lg">
+                <div class="md:w-1/2 mx-20">
+                    <img src="img_book/caver22_4.gif" alt="مكتبة رقمية" class="">
                 </div>
             </div>
         </div>
     </section>
-
-    
     
     <!-- Latest Books Section -->
     <section class="py-12">
-        <div class="container mx-auto px-4">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">أحدث الإضافات</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Book Card 1 -->
-                <div class="book-card bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="img_book/book1.jpg" alt="كتاب" class="w-full h-56 object-cover">
-                    <div class="p-4">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm text-[#ff9c00]">رواية</span>
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 text-sm"></i>
-                                <span class="text-sm text-gray-600 mr-1">4.5</span>
-                            </div>
-                        </div>
-                        <h3 class="text-lg font-semibold mb-1">  تحت اجنحة البرزخ </h3>
-                        <p class="text-gray-600 mb-4"> عبد الرزاق الحجامي </p>
-                        <a href="book-details.html?id=1" class="block text-center bg-[#ff9c00] text-white py-2 rounded hover:bg-[#e68a00]">عرض الكتاب</a>
-                    </div>
-                </div>
+    <div class="container mx-auto px-4 ">
+        <!-- عنوان قسم جديد ومحسن -->
+        <div class="section-title-container">
+            <h2 class="section-title text-3xl text-gray-800 mr-4">
                 
-                <!-- Book Card 2 -->
-                <div class="book-card bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="img_book/book2.jpg" alt="كتاب" class="w-full h-56 object-cover">
-                    <div class="p-4">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm text-[#ff9c00]">ثقافة</span>
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 text-sm"></i>
-                                <span class="text-sm text-gray-600 mr-1">4.8</span>
-                            </div>
-                        </div>
-                        <h3 class="text-lg font-semibold mb-1"> السباحة عكس التيار </h3>
-                        <p class="text-gray-600 mb-4">السيد محسن المدرسي</p>
-                        <a href="book-details.html?id=2" class="block text-center bg-[#ff9c00] text-white py-2 rounded hover:bg-[#e68a00]">عرض الكتاب</a>
-                    </div>
-                </div>
-                
-                <!-- Book Card 3 -->
-                <div class="book-card bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="img_book/book3.jpg" alt="كتاب" class="w-full h-56 object-cover">
-                    <div class="p-4">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm text-[#ff9c00]">فلسفة</span>
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 text-sm"></i>
-                                <span class="text-sm text-gray-600 mr-1">4.6</span>
-                            </div>
-                        </div>
-                        <h3 class="text-lg font-semibold mb-1">  فلسفتنا </h3>
-                        <p class="text-gray-600 mb-4">السيد محمد باقر الصدر </p>
-                        <a href="book-details.html?id=3" class="block text-center bg-[#ff9c00] text-white py-2 rounded hover:bg-[#e68a00]">عرض الكتاب</a>
-                    </div>
-                </div>
-                
-                <!-- Book Card 4 -->
-                <div class="book-card bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="img_book/book4.jpg" alt="كتاب" class="w-full h-56 object-cover">
-                    <div class="p-4">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm text-[#ff9c00]">تاريخ</span>
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 text-sm"></i>
-                                <span class="text-sm text-gray-600 mr-1">4.7</span>
-                            </div>
-                        </div>
-                        <h3 class="text-lg font-semibold mb-1">   التاريخ الاسلامي</h3>
-                        <p class="text-gray-600 mb-4"> السيد محمد تقي المدرسي</p>
-                        <a href="book-details.html?id=4" class="block text-center bg-[#ff9c00] text-white py-2 rounded hover:bg-[#e68a00]">عرض الكتاب</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-8 text-center">
-                <a href="categories.html" class="text-[#ff9c00] hover:text-[#e68a00] font-medium">عرض المزيد من الكتب <i class="fas fa-arrow-left mr-2"></i></a>
-            </div>
+                أحدث الإضافات
+            </h2>
+            <div class="section-title-line"></div>
         </div>
+
+            <!-- رف 1 -->
+            <div class="flex justify-center">
+            <div class="shelf-wrapper w-full md:w-1/2">
+                <div class="books-slider pr-16 mr-2 ">
+                    <div class="book-card w-[140px]">
+                    <a href="#"><img src="img_book/book11.jpg" class="book-img " alt="كتاب 1"></a>
+                    </div>
+                    <div class="book-card w-[140px]">
+                    <a href="#"><img src="img_book/book22.jpg" class="book-img" alt="كتاب 2"></a>
+                    </div>
+                    <div class="book-card w-[140px]">
+                    <a href="#"><img src="img_book/book33.webp" class="book-img" alt="كتاب 3"></a>
+                    </div>
+                    <div class="book-card w-[140px]">
+                    <a href="#"><img src="img_book/book44.webp" class="book-img" alt="كتاب 3"></a>
+                    </div>
+                    
+                </div>
+                <img src="image/stand22.png" alt="رف الكتب" class="shelf-img mt-2">
+            </div>
+            </div>
+
+            <!-- رف 2,3 -->
+            <div class="flex " id="smrf">
+            
+                <div class="flex justify-center shelf-container">
+                <div class="nav-arrow nav-arrow-right bg-blue-800 px-5 hover:bg-blue-900 text-white rounded-full p-3 shadow-lg show" onclick="scrollBooks(this, -200)">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+
+                <!-- رف 2 -->
+                <div class="shelf-wrapper w-full md:w-1/2">
+                    <div class="books-slider pr-16 mr-2 ">
+                        <div class="book-card w-[140px]">
+                        <a href="#"><img src="img_book/book55.png" class="book-img " alt="كتاب 1"></a>
+                        </div>
+                        <div class="book-card w-[140px]">
+                        <a href="#"><img src="img_book/book66.jpg" class="book-img" alt="كتاب 2"></a>
+                        </div>
+                        <div class="book-card w-[140px]">
+                        <a href="#"><img src="img_book/book77.png" class="book-img" alt="كتاب 3"></a>
+                        </div>
+                        <div class="book-card w-[140px]">
+                        <a href="#"><img src="img_book/book88.jpg" class="book-img" alt="كتاب 3"></a>
+                        </div>
+                        
+                    </div>
+                    <img src="image/stand22.png" alt="رف الكتب" class="shelf-img mt-2">
+                </div>
+
+                <div class="nav-arrow nav-arrow-left bg-blue-800 px-5 hover:bg-blue-900 text-white rounded-full p-3 shadow-lg show" onclick="scrollBooks(this, 200)">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                </div>
+
+                <!-- رف 3 -->
+                <div class="flex justify-center shelf-container">
+                    <div class="nav-arrow nav-arrow-right bg-blue-800 px-5 hover:bg-blue-900 text-white rounded-full p-3 shadow-lg show" onclick="scrollBooks(this, -200)">
+                    <i class="fas fa-chevron-right"></i>
+                    </div>
+                    
+                    <div class="shelf-wrapper w-full md:w-1/2">
+                        <div class="books-slider pr-16 mr-2 ">
+                            <div class="book-card w-[140px]">
+                            <a href="#"><img src="img_book/book99.jpg" class="book-img " alt="كتاب 1"></a>
+                            </div>
+                            <div class="book-card w-[140px]">
+                            <a href="#"><img src="img_book/book10.jpg" class="book-img" alt="كتاب 2"></a>
+                            </div>
+                            <div class="book-card w-[140px]">
+                            <a href="#"><img src="img_book/book111.jpg" class="book-img" alt="كتاب 3"></a>
+                            </div>
+                            <div class="book-card w-[140px]">
+                            <a href="#"><img src="img_book/book122.jpg" class="book-img" alt="كتاب 3"></a>
+                            </div>
+                            
+                        </div>
+                        <img src="image/stand22.png" alt="رف الكتب" class="shelf-img mt-2">
+                    </div>
+
+                    <div class="nav-arrow nav-arrow-left bg-blue-800 px-5 hover:bg-blue-900 text-white rounded-full p-3 shadow-lg show" onclick="scrollBooks(this, 200)">
+                    <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="text-center mt-8">
+                <a href="categories.html" class="text-2xl text-blue-800 hover:text-blue-900 font-medium">عرض المزيد من الكتب <i class="fas fa-arrow-left mr-2"></i></a>
+            </div>
+    </div>
     </section>
 
-    <!-- Recommended Books -->
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">الكتب الموصى بها</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Book Card 1 -->
-                <div class="book-card bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="img_book/book5.jpg" alt="كتاب" class="w-full h-56 object-cover">
-                    <div class="p-4">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm text-[#ff9c00]">ثقافة</span>
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 text-sm"></i>
-                                <span class="text-sm text-gray-600 mr-1">4.9</span>
-                            </div>
-                        </div>
-                        <h3 class="text-lg font-semibold mb-1">قصاصات جامعية</h3>
-                        <p class="text-gray-600 mb-4">السيد محسن المدرسي</p>
-                        <a href="book-details.html?id=5" class="block text-center bg-[#ff9c00] text-white py-2 rounded hover:bg-[#e68a00]">عرض الكتاب</a>
-                    </div>
-                </div>
-                
-                <!-- Book Card 2 -->
-                <div class="book-card bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="img_book/book6.jpg" alt="كتاب" class="w-full h-56 object-cover">
-                    <div class="p-4">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm text-[#ff9c00]">علم نفس</span>
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 text-sm"></i>
-                                <span class="text-sm text-gray-600 mr-1">4.7</span>
-                            </div>
-                        </div>
-                        <h3 class="text-lg font-semibold mb-1"> العقلانية</h3>
-                        <p class="text-gray-600 mb-4"> ستيفن بينكر</p>
-                        <a href="book-details.html?id=6" class="block text-center bg-[#ff9c00] text-white py-2 rounded hover:bg-[#e68a00]">عرض الكتاب</a>
-                    </div>
-                </div>
-                
-                <!-- Book Card 3 -->
-                <div class="book-card bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="img_book/book7.jpg" alt="كتاب" class="w-full h-56 object-cover">
-                    <div class="p-4">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm text-[#ff9c00]">تطوير ذاتي</span>
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 text-sm"></i>
-                                <span class="text-sm text-gray-600 mr-1">4.5</span>
-                            </div>
-                        </div>
-                        <h3 class="text-lg font-semibold mb-1">العادات السبع</h3>
-                        <p class="text-gray-600 mb-4">ستيفن كوفي</p>
-                        <a href="book-details.html?id=7" class="block text-center bg-[#ff9c00] text-white py-2 rounded hover:bg-[#e68a00]">عرض الكتاب</a>
-                    </div>
-                </div>
-                
-                <!-- Book Card 4 -->
-                <div class="book-card bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="img_book/book8.jpg" alt="كتاب" class="w-full h-56 object-cover">
-                    <div class="p-4">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm text-[#ff9c00]">علوم</span>
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 text-sm"></i>
-                                <span class="text-sm text-gray-600 mr-1">4.8</span>
-                            </div>
-                        </div>
-                        <h3 class="text-lg font-semibold mb-1">  البرمجة بلغة c++ </h3>
-                        <p class="text-gray-600 mb-4"> د.ياسر صادق مطيع</p>
-                        <a href="book-details.html?id=8" class="block text-center bg-[#ff9c00] text-white py-2 rounded hover:bg-[#e68a00]">عرض الكتاب</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Categories Section -->
     <section class="py-12">
         <div class="container mx-auto px-4">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">تصفح حسب التصنيف</h2>
+            <div class="section-title-container">
+                <h2 class="section-title text-3xl text-gray-800 mr-4">
+                     المراحل
+                </h2>
+                <div class="section-title-line"></div>
+            </div>
+
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <!-- Category Card 1 -->
-                <a href="categories.html?cat=novels" class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all">
-                    <div class="h-40 bg-[#fff2d9] flex items-center justify-center">
-                        <i class="fas fa-book text-4xl text-[#ff9c00]"></i>
+                <a href="categories.html?stage=first" class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all">
+                    <div class="h-40 bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-book-reader text-4xl text-blue-800"></i>
                     </div>
                     <div class="p-4 text-center">
-                        <h3 class="text-lg font-semibold">الروايات</h3>
-                        <p class="text-gray-600 mt-2">استكشف عالم الخيال والقصص المتنوعة</p>
+                        <h3 class="text-lg font-semibold">المرحلة الأولى</h3>
+                        <p class="text-gray-600 mt-2">الكتب والمصادر الأساسية للسنة الدراسية الأولى</p>
                     </div>
                 </a>
                 
-                <!-- Category Card 2 -->
-                <a href="categories.html?cat=science" class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all">
-                    <div class="h-40 bg-[#fff2d9] flex items-center justify-center">
-                        <i class="fas fa-flask text-4xl text-[#ff9c00]"></i>
+               <!-- Category Card 2 -->
+                <a href="categories.html?stage=second" class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all">
+                    <div class="h-40 bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-code text-4xl text-blue-800"></i>
                     </div>
                     <div class="p-4 text-center">
-                        <h3 class="text-lg font-semibold">العلوم</h3>
-                        <p class="text-gray-600 mt-2">اكتشف أحدث الأبحاث والمعارف العلمية</p>
+                        <h3 class="text-lg font-semibold">المرحلة الثانية</h3>
+                        <p class="text-gray-600 mt-2">المراجع والمصادر التعليمية للسنة الدراسية الثانية</p>
                     </div>
                 </a>
-                
+
                 <!-- Category Card 3 -->
-                <a href="categories.html?cat=history" class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all">
-                    <div class="h-40 bg-[#fff2d9] flex items-center justify-center">
-                        <i class="fas fa-landmark text-4xl text-[#ff9c00]"></i>
+                <a href="categories.html?stage=third" class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all">
+                    <div class="h-40 bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-database text-4xl text-blue-800"></i>
                     </div>
                     <div class="p-4 text-center">
-                        <h3 class="text-lg font-semibold">التاريخ</h3>
-                        <p class="text-gray-600 mt-2">رحلة عبر الزمن في أحداث وقصص الماضي</p>
+                        <h3 class="text-lg font-semibold">المرحلة الثالثة</h3>
+                        <p class="text-gray-600 mt-2">المصادر المتقدمة والكتب التخصصية للسنة الثالثة</p>
                     </div>
                 </a>
                 
                 <!-- Category Card 4 -->
-                <a href="categories.html?cat=philosophy" class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all">
-                    <div class="h-40 bg-[#fff2d9] flex items-center justify-center">
-                        <i class="fas fa-brain text-4xl text-[#ff9c00]"></i>
+                <a href="categories.html?stage=fourth" class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all">
+                    <div class="h-40 bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-4xl text-blue-800"></i>
                     </div>
                     <div class="p-4 text-center">
-                        <h3 class="text-lg font-semibold">الفلسفة</h3>
-                        <p class="text-gray-600 mt-2">تأملات في الوجود والمعرفة والقيم</p>
+                        <h3 class="text-lg font-semibold">المرحلة الرابعة</h3>
+                        <p class="text-gray-600 mt-2">مصادر مشاريع التخرج والكتب المتخصصة للسنة النهائية</p>
                     </div>
                 </a>
             </div>
             <div class="mt-8 text-center">
-                <a href="categories.html" class="bg-[#ff9c00] text-white px-6 py-3 rounded-lg hover:bg-[#e68a00] inline-block">
-                    عرض جميع التصنيفات
+                <a href="categories.html" class="bg-blue-800 text-white px-6 py-3 rounded-lg hover:bg-blue-900 inline-block">
+                    عرض جميع المراحل الدراسية
                 </a>
             </div>
         </div>
@@ -499,7 +610,7 @@
         <!-- مكان للصورة الخلفية -->
         <div class="absolute inset-0 z-0 opacity-20" id="background-image">
             <!-- يمكنك إضافة الصورة الخلفية هنا لاحقًا -->
-           
+        
         </div>
 
         <div class="container mx-auto px-4 relative z-10">
@@ -513,7 +624,7 @@
                     </div>
                 </div>
                 <div class="md:w-1/2">
-                    <h3 class="text-2xl font-semibold text-[#ff9c00] mb-4">المساعد الذكي الخاص بك</h3>
+                    <h3 class="text-2xl font-semibold text-blue-800 mb-4">المساعد الذكي الخاص بك</h3>
                     <p class="text-lg text-gray-700 mb-6">
                         <strong>MaSa AI</strong> هو مساعدك الذكي المبتكر، مزيج بين اسمي مهدي وسجاد، تم تطويره ليكون رفيقك في عالم المعرفة والقراءة.
                     </p>
@@ -524,20 +635,20 @@
                         <h4 class="text-xl font-medium text-gray-800 mb-3">ما يمكن لـ MaSa AI مساعدتك به:</h4>
                         <ul class="space-y-2 text-gray-700">
                             <li class="flex items-center">
-                                <i class="fas fa-check-circle text-[#ff9c00] ml-2"></i>
+                                <i class="fas fa-check-circle text-blue-800 ml-2"></i>
                                 اقتراح كتب تناسب اهتماماتك
                             </li>
                             <li class="flex items-center">
-                                <i class="fas fa-check-circle text-[#ff9c00] ml-2"></i>
+                                <i class="fas fa-check-circle text-blue-800 ml-2"></i>
                                 الإجابة على استفساراتك حول محتوى الكتب
                             </li>
                             <li class="flex items-center">
-                                <i class="fas fa-check-circle text-[#ff9c00] ml-2"></i>
+                                <i class="fas fa-check-circle text-blue-800 ml-2"></i>
                                 مساعدتك في العثور على المعلومات بسرعة
                             </li>
                         </ul>
                     </div>
-                    <a href="masa-ai.html" class="bg-[#ff9c00] text-white px-8 py-3 rounded-lg hover:bg-[#e68b00] inline-block">
+                    <a href="masa-ai.html" class="bg-blue-800 text-white px-8 py-3 rounded-lg hover:bg-blue-900 inline-block">
                         تحدث مع MaSa AI الآن
                     </a>
                 </div>
@@ -546,21 +657,21 @@
     </section>
 
     <!-- Join Section -->
-    <section class="py-16 bg-[#ff9c00] text-white">
+    <section class="py-16 bg-blue-800 text-white">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-4">انضم إلى مجتمع القراء لدينا</h2>
             <p class="text-lg mb-8 max-w-2xl mx-auto">سجل الآن للوصول إلى آلاف الكتب المجانية، وميزات متقدمة للقراءة، وحفظ تقدمك عبر الأجهزة المختلفة</p>
             <div class="flex justify-center space-x-4 space-x-reverse">
-                <a href="register.html" class="bg-white text-[#ff9c00] px-6 py-3 rounded-lg hover:bg-gray-100 font-medium">
+                <a id="free" href="register.html" class="bg-slate-50 text-blue-900 px-6 py-3 rounded-lg hover:bg-gray-100 font-medium">
                     إنشاء حساب مجاني
                 </a>
-                <a href="login.html" class="border border-white text-white px-6 py-3 rounded-lg hover:bg-[#e68a00] font-medium">
+                <a href="login.html" class="border border-white text-white px-8 py-3 rounded-lg hover:bg-blue-900 font-medium">
                     تسجيل الدخول
                 </a>
             </div>
         </div>
     </section>
-    
+
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-12">
         <div class="container mx-auto px-4">
@@ -592,24 +703,15 @@
                     </ul>
                 </div>
                 
-                <!-- <div>
-                    <h3 class="text-lg font-bold mb-4">الدعم</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">الأسئلة الشائعة</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">اتصل بنا</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">سياسة الخصوصية</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">شروط الاستخدام</a></li>
-                    </ul>
-                </div> -->
             </div>
             
             
         </div>
     </footer>
-    
-    <div class="loader-container">
-        <img src="img_book/loader-img6.gif" class="h-[130px]"/>
-      </div>
+
+    <!-- <div class="loader-container">
+        <img src="img_book/loader-img66.gif" class="h-[130px]"/>
+    </div> -->
 
     <!-- JavaScript -->
     <script>
