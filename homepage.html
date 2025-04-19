@@ -283,7 +283,7 @@ body.dark-mode #profile-modal .text-gray-500 {
 
 /* إضافة تحريك للعناصر */
 .fade-in {
-            animation: fadeIn 1.5s ease-in-out;
+            animation: fadeIn 0.5s ease-in-out;
         }
         
         .slide-up {
@@ -476,7 +476,7 @@ body.dark-mode #profile-modal .text-gray-500 {
         
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 overflow-x-hidden">
     <!-- زر العودة للأعلى -->
     <button id="back-to-top" class="bg-blue-800 px-5 hover:bg-blue-900 text-white rounded-full p-3 shadow-lg">
         <i class="fas fa-arrow-up"></i>
@@ -504,9 +504,7 @@ body.dark-mode #profile-modal .text-gray-500 {
                 </nav>
 
                 <div class="flex items-center space-x-4 space-x-reverse">
-                    <button id="darkModeToggle" class="text-white bg-blue-700 hover:bg-blue-600 p-2 rounded-full">
-                        <i class="fas fa-moon"></i>
-                    </button>
+                    
                     <a id="showLogin" class="bg-white text-blue-800 hover:cursor-pointer px-4 py-2 rounded-lg hover:bg-gray-100">تسجيل الدخول </a>
                 </div>
             </div>
@@ -652,7 +650,7 @@ body.dark-mode #profile-modal .text-gray-500 {
             <div class="flex flex-col items-center text-center">
                 <!-- العنوان الرئيسي -->
                 <h1 class="text-4xl md:text-5xl text-slate-800 font-bold mb-8">
-                    مرحباً بك في <span class="colorful-title">عالم المعرفة الرقمية</span> لعلوم الحاسوب!
+                    <span class="colorful-title">  رفوف رقمية </span> لشغف لا ينتهي
                 </h1>
             
                 <!-- صورة الكتاب -->
@@ -661,17 +659,19 @@ body.dark-mode #profile-modal .text-gray-500 {
                 </div>
             
                 <!-- النص التوضيحي -->
-                <p class="text-xl max-w-3xl text-gray-600 mb-8 slide-up" style="animation-delay: 0.6s;">
-                    استعد لاكتشاف كنز من الكتب والمراجع المتميزة في البرمجة، الخوارزميات، الذكاء الاصطناعي، وأكثر من ذلك بكثير، كل ما تحتاجه لتطوير مهاراتك وتجديد شغفك بالتقنية... تجده هنا!
-                </p>
-            
+                <p class="text-2xl max-w-4xl text-gray-800 mb-8 slide-up" style="animation-delay: 0.6s;">
+                    أكتشف ثروة معرفية من الكتب والمراجع الرفيعة في مجالات البرمجة، الخوارزميات، الذكاء الأصطناعي، وأكثر. كل ما تحتاجه لصقل مهاراتك وتعزيز شغفك بالتقنية... تجده هنا، بين يديك. </p>
                 <!-- زر العرض -->
-                <div class="mt-4 slide-right" style="animation-delay: 0.9s;">
-                    <a href="categories.html" class="btn-explore bg-blue-800 text-white px-10 py-4 rounded-lg text-xl font-medium inline-flex items-center relative">
-                        <span class="z-10">تصفح الكتب</span>
-                        <i class="fas fa-book-open mr-3 z-10"></i>
-                    </a>
-                </div>
+                    <div class="mt-4 slide-right" style="animation-delay: 0.9s;">
+                        
+                          <a href="categories.html" class="btn-explore bg-blue-800 text-white px-10 py-4 rounded-lg text-xl font-medium inline-flex items-center relative">
+                            <span class="z-10">تصفح الكتب</span>
+                            <i class="fas fa-book-open mr-3 z-10"></i>
+                          </a>  
+                       
+                        
+                    </div>
+                
             </div>
         </div>
     
@@ -912,22 +912,6 @@ body.dark-mode #profile-modal .text-gray-500 {
         </div>
     </section>
 
-    <!-- Join Section -->
-    <!-- <section class="py-16 bg-blue-800 text-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-4">انضم إلى مجتمع القراء لدينا</h2>
-            <p class="text-lg mb-8 max-w-2xl mx-auto">سجل الآن للوصول إلى آلاف الكتب المجانية، وميزات متقدمة للقراءة، وحفظ تقدمك عبر الأجهزة المختلفة</p>
-            <div class="flex justify-center space-x-4 space-x-reverse">
-                <a id="free" href="register.html" class="bg-slate-50 text-blue-900 px-6 py-3 rounded-lg hover:bg-gray-100 font-medium">
-                    إنشاء حساب مجاني
-                </a>
-                <a href="login.html" class="border border-white text-white px-8 py-3 rounded-lg hover:bg-blue-900 font-medium">
-                    تسجيل الدخول
-                </a>
-            </div>
-        </div>
-    </section> -->
-
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-12">
         <div class="container mx-auto px-4">
@@ -952,10 +936,7 @@ body.dark-mode #profile-modal .text-gray-500 {
                 <div>
                     <h3 class="text-lg font-bold mb-4">حسابي</h3>
                     <ul class="space-y-2">
-                        <li><a href="login.html" class="text-gray-400 hover:text-white">تسجيل الدخول</a></li>
-                        <li><a href="register.html" class="text-gray-400 hover:text-white">إنشاء حساب</a></li>
-                        <li><a href="profile.html" class="text-gray-400 hover:text-white">الملف الشخصي</a></li>
-                        <!-- <li><a href="#" class="text-gray-400 hover:text-white">المفضلة</a></li> -->
+                        <li><a id="showLogin" class="text-gray-400 hover:text-white hover:cursor-pointer">تسجيل الدخول</a></li>
                     </ul>
                 </div>
                 
@@ -965,17 +946,17 @@ body.dark-mode #profile-modal .text-gray-500 {
         </div>
     </footer>
 
-    <div class="loader-container">
+    <!-- <div class="loader-container">
         <img src="img_book/loader-img66.gif" class="h-[130px]"/>
-    </div>
+    </div> -->
 
     <!-- JavaScript -->
-    <script>
+    <!-- <script>
         // Simple JavaScript for basic functionality
         document.addEventListener('DOMContentLoaded', function() {
             // Mobile menu toggle functionality could be added here
         });
-    </script>
+    </script> -->
 
 
 
