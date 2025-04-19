@@ -473,18 +473,18 @@ function setupModalEventListeners() {
     
     if (loginTab && registerTab && loginForm && registerForm) {
         loginTab.addEventListener('click', function() {
-            this.classList.add('border-[#ff9c00]', 'text-[#ff9c00]');
+            this.classList.add('border-blue-800', 'text-blue-80');
             this.classList.remove('border-gray-200', 'text-gray-500');
-            registerTab.classList.remove('border-[#ff9c00]', 'text-[#ff9c00]');
+            registerTab.classList.remove('border-blue-800', 'text-blue-80');
             registerTab.classList.add('border-gray-200', 'text-gray-500');
             loginForm.classList.remove('hidden');
             registerForm.classList.add('hidden');
         });
         
         registerTab.addEventListener('click', function() {
-            this.classList.add('border-[#ff9c00]', 'text-[#ff9c00]');
+            this.classList.add('border-blue-800', 'text-blue-80');
             this.classList.remove('border-gray-200', 'text-gray-500');
-            loginTab.classList.remove('border-[#ff9c00]', 'text-[#ff9c00]');
+            loginTab.classList.remove('border-blue-800', 'text-blue-80');
             loginTab.classList.add('border-gray-200', 'text-gray-500');
             registerForm.classList.remove('hidden');
             loginForm.classList.add('hidden');

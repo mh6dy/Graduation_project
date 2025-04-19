@@ -130,11 +130,11 @@ loginButton.addEventListener('click', function() {
 
     loginButton.classList.remove('border-gray-200');
     loginButton.classList.remove('text-gray-500');
-    loginButton.classList.add('border-[#ff9c00]');
-    loginButton.classList.add('text-[#ff9c00]');
+    loginButton.classList.add('border-blue-800');
+    loginButton.classList.add('text-blue-800');
     
-    registerButton.classList.remove('border-[#ff9c00]');
-    registerButton.classList.remove('text-[#ff9c00]');
+    registerButton.classList.remove('border-blue-800');
+    registerButton.classList.remove('text-blue-800');
     registerButton.classList.add('border-gray-200');
     registerButton.classList.add('text-gray-500');
 
@@ -146,11 +146,11 @@ registerButton.addEventListener('click', function() {
 
     registerButton.classList.remove('border-gray-200');
     registerButton.classList.remove('text-gray-500');
-    registerButton.classList.add('border-[#ff9c00]');
-    registerButton.classList.add('text-[#ff9c00]');
+    registerButton.classList.add('border-blue-800');
+    registerButton.classList.add('text-blue-800');
     
-    loginButton.classList.remove('border-[#ff9c00]');
-    loginButton.classList.remove('text-[#ff9c00]');
+    loginButton.classList.remove('border-blue-800');
+    loginButton.classList.remove('text-blue-800');
     loginButton.classList.add('border-gray-200');
     loginButton.classList.add('text-gray-500');
 

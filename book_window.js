@@ -163,9 +163,11 @@
     function closeBookModal() {
         document.getElementById('bookModalOverlay').style.display = 'none';
         
-        // إعادة تفعيل التمرير في الخلفية عند إغلاق النافذة المنبثقة
-        document.body.style.overflow = 'auto';
+        // إعادة التمرير العمودي فقط عند إغلاق النافذة المنبثقة
+        document.body.style.overflowY = 'auto';
+        document.body.style.overflowX = 'hidden';
     }
+    
     
     // دالة لتمرير الكتب في الرف
     function scrollBooks(arrow, scrollAmount) {
