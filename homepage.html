@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -13,7 +12,6 @@
         * {
             font-family: 'Tajawal', sans-serif;
         }
-
          /* إضافة أنماط للـ Header الثابت */
          header {
             position: fixed;
@@ -29,6 +27,19 @@
         body {
             padding-top: 80px; /* يجب ضبط هذه القيمة بناءً على ارتفاع الـ Header الخاص بك */
         }
+
+          /* تنسيق للعنوان الملون */
+    .colorful-title {
+        color: #2563eb;  /* أزرق أساسي */
+        animation: colorChange 5s infinite linear;
+    }
+    
+    @keyframes colorChange {
+        0% { color: #2563eb; }  /* أزرق */
+        33% { color: #1e40af; }  /* أزرق غامق */
+        66% { color: #3b82f6; }  /* أزرق فاتح */
+        100% { color: #2563eb; }  /* عودة للأزرق الأساسي */
+    }
     
     .book-card:hover {
             transform: translateY(-5px);
@@ -180,13 +191,21 @@
     }
 
     /* أنماط جديدة لعناوين الأقسام */
+    .section-title-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 50px;
+    }
+
     .section-title {
         position: relative;
         display: inline-block;
-        padding-right: 1.5rem;
+        padding: 0 1.5rem;
         margin-bottom: 1.5rem;
         font-weight: bold;
         color: #1e3a8a;
+        text-align: center;
     }
 
     .section-title::before {
@@ -201,18 +220,30 @@
         border-radius: 3px;
     }
 
-   
-
-    .section-title-container {
-        display: flex;
-        align-items: center;
-        margin-bottom: 50px;
+    .section-title::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 5px;
+        height: 25px;
+        background-color: #1e40af;
+        border-radius: 3px;
     }
 
-    .section-title-line {
+    .section-title-line-right {
         flex-grow: 1;
         height: 2px;
-        margin-bottom:15px;
+        margin-bottom: 15px;
+        background: linear-gradient(to right , #1e40af, transparent);
+        margin-left: 1rem;
+    }
+
+    .section-title-line-left {
+        flex-grow: 1;
+        height: 2px;
+        margin-bottom: 15px;
         background: linear-gradient(to left, #1e40af, transparent);
         margin-right: 1rem;
     }
@@ -250,6 +281,199 @@ body.dark-mode #profile-modal .text-gray-500 {
     color: #e5e7eb !important;
 }
 
+/* إضافة تحريك للعناصر */
+.fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        .slide-up {
+            animation: slideUp 1s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .slide-right {
+            animation: slideRight 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+        
+        .pulse {
+            animation: pulse 4s infinite;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideRight {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* أشكال زخرفية */
+        .shape {
+            position: absolute;
+            z-index: 0;
+        }
+        
+        .shape-1 {
+            top: 15%;
+            left: 5%;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(37, 99, 235, 0.1), rgba(37, 99, 235, 0.2));
+        }
+        
+        .shape-2 {
+            bottom: 10%;
+            right: 8%;
+            width: 150px;
+            height: 150px;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.15));
+        }
+        
+        .shape-3 {
+            top: 30%;
+            right: 20%;
+            width: 80px;
+            height: 80px;
+            transform: rotate(45deg);
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.05), rgba(37, 99, 235, 0.1));
+        }
+        
+        /* تحسين زر العرض */
+        .btn-explore {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-explore:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(30, 64, 175, 0.3);
+        }
+        
+        .btn-explore::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .btn-explore:hover::after {
+            transform: translateX(0);
+        }
+        
+        /* تأثير الخلفية */
+        .hero-gradient {
+            background: linear-gradient(135deg, #e6f0ff 0%, #f0f7ff 50%, #e1eeff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%232563eb' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E");
+            z-index: 0;
+        }
+
+        /* تنسيق نافذة معلومات الكتاب */
+        .book-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        .book-modal {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            padding: 25px;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #3b82f6;
+        }
+        .book-info {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+        }
+        .book-image-container {
+            flex: 0 0 40%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .book-image-container img {
+            max-height: 350px;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .book-details-container {
+            flex: 0 0 60%;
+            display: flex;
+            flex-direction: column;
+        }
+        .book-rating {
+            color: #f59e0b;
+            font-size: 24px;
+            margin: 10px 0;
+        }
+        .download-btn {
+            margin-top: 20px;
+            background-color: #3b82f6;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            text-align: center;
+        }
+        .download-btn:hover {
+            background-color: #2563eb;
+        }
+        
     </style>
 </head>
 <body class="bg-gray-50">
@@ -416,121 +640,137 @@ body.dark-mode #profile-modal .text-gray-500 {
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="bg-blue-50 py-12">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-8 md:mb-0 mr-12">
-                    <h1 class="text-4xl font-bold text-gray-800 mb-4">مرحباً بك في عالم المعرفة الرقمية لعلوم الحاسوب!</h1>
-                    <p class="text-xl max-w-2xl text-gray-600 mb-6">استعد لاكتشاف كنز من الكتب والمراجع المتميزة في البرمجة، الخوارزميات، الذكاء الاصطناعي، وأكثر من ذلك بكثير , كل ما تحتاجه لتطوير مهاراتك وتجديد شغفك بالتقنية... تجده هنا!</p>
-                    <div class="flex space-x-4 space-x-reverse">
-                        <a href="categories.html" class="bg-blue-800 text-white px-6 py-3 rounded-lg hover:bg-blue-900">
-                            تصفح الكتب
-                        </a>
-                        
-                    </div>
+
+    <!-- Hero Section معدّل -->
+    <section class="hero-gradient py-12 min-h-[650px] flex items-center relative">
+        <!-- أشكال زخرفية -->
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    
+        <div class="container mx-auto px-4 z-10">
+            <div class="flex flex-col items-center text-center">
+                <!-- العنوان الرئيسي -->
+                <h1 class="text-4xl md:text-5xl text-slate-800 font-bold mb-8">
+                    مرحباً بك في <span class="colorful-title">عالم المعرفة الرقمية</span> لعلوم الحاسوب!
+                </h1>
+            
+                <!-- صورة الكتاب -->
+                <div class="w-full md:w-2/3 lg:w-1/2 mb-8 slide-up" style="animation-delay: 0.3s;">
+                    <img src="img_book/caver22_9.gif" alt="مكتبة رقمية" class="mx-auto pulse">
                 </div>
-                <div class="md:w-1/2 mx-20">
-                    <img src="img_book/caver22_4.gif" alt="مكتبة رقمية" class="">
+            
+                <!-- النص التوضيحي -->
+                <p class="text-xl max-w-3xl text-gray-600 mb-8 slide-up" style="animation-delay: 0.6s;">
+                    استعد لاكتشاف كنز من الكتب والمراجع المتميزة في البرمجة، الخوارزميات، الذكاء الاصطناعي، وأكثر من ذلك بكثير، كل ما تحتاجه لتطوير مهاراتك وتجديد شغفك بالتقنية... تجده هنا!
+                </p>
+            
+                <!-- زر العرض -->
+                <div class="mt-4 slide-right" style="animation-delay: 0.9s;">
+                    <a href="categories.html" class="btn-explore bg-blue-800 text-white px-10 py-4 rounded-lg text-xl font-medium inline-flex items-center relative">
+                        <span class="z-10">تصفح الكتب</span>
+                        <i class="fas fa-book-open mr-3 z-10"></i>
+                    </a>
                 </div>
             </div>
         </div>
+    
+        <!-- أشكال زخرفية إضافية -->
+        <div class="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-blue-50 to-transparent opacity-50"></div>
+        <div class="absolute bottom-0 right-0 w-32 h-32 bg-blue-100 rounded-full opacity-20" style="transform: translate(50%, 50%);"></div>
+        <div class="absolute top-0 left-0 w-40 h-40 bg-blue-100 rounded-full opacity-20" style="transform: translate(-50%, -50%);"></div>
     </section>
     
     <!-- Latest Books Section -->
-    <section class="py-12">
-    <div class="container mx-auto px-4 ">
-        <!-- عنوان قسم جديد ومحسن -->
-        <div class="section-title-container">
-            <h2 class="section-title text-3xl text-gray-800 mr-4">
-                
-                أحدث الإضافات
-            </h2>
-            <div class="section-title-line"></div>
-        </div>
+    <section class="py-12 ">
+        <div class="container mx-auto px-4">
+            <!-- عنوان القسم -->
+            <div class="section-title-container">
+                <div class="section-title-line-right"></div>
+                <h2 class="section-title text-3xl text-gray-800">
+                    أحدث الإضافات
+                </h2>
+                <div class="section-title-line-left"></div>
+            </div>
 
             <!-- رف 1 -->
             <div class="flex justify-center">
-            <div class="shelf-wrapper w-full md:w-1/2">
-                <div class="books-slider pr-16 mr-2 ">
-                    <div class="book-card w-[140px]">
-                    <a href="#"><img src="img_book/book11.jpg" class="book-img " alt="كتاب 1"></a>
+                <div class="shelf-wrapper w-full md:w-1/2">
+                    <div class="books-slider pr-16 mr-2">
+                        <div class="book-card w-[140px] hover:cursor-pointer">
+                            <img src="img_book/book11.jpg" class="book-img" alt="كتاب 1" onclick="showBookInfo('book11')">
+                        </div>
+                        <div class="book-card w-[140px] hover:cursor-pointer">
+                            <img src="img_book/book22.jpg" class="book-img" alt="كتاب 2" onclick="showBookInfo('book22')">
+                        </div>
+                        <div class="book-card w-[140px] hover:cursor-pointer">
+                            <img src="img_book/book33.webp" class="book-img" alt="كتاب 3" onclick="showBookInfo('book33')">
+                        </div>
+                        <div class="book-card w-[140px] hover:cursor-pointer">
+                            <img src="img_book/book44.webp" class="book-img" alt="كتاب 4" onclick="showBookInfo('book44')">
+                        </div>
                     </div>
-                    <div class="book-card w-[140px]">
-                    <a href="#"><img src="img_book/book22.jpg" class="book-img" alt="كتاب 2"></a>
-                    </div>
-                    <div class="book-card w-[140px]">
-                    <a href="#"><img src="img_book/book33.webp" class="book-img" alt="كتاب 3"></a>
-                    </div>
-                    <div class="book-card w-[140px]">
-                    <a href="#"><img src="img_book/book44.webp" class="book-img" alt="كتاب 3"></a>
-                    </div>
-                    
+                    <img src="image/stand22.png" alt="رف الكتب" class="shelf-img mt-2">
                 </div>
-                <img src="image/stand22.png" alt="رف الكتب" class="shelf-img mt-2">
-            </div>
             </div>
 
             <!-- رف 2,3 -->
             <div class="flex " id="smrf">
-            
-                <div class="flex justify-center shelf-container">
-                <div class="nav-arrow nav-arrow-right bg-blue-800 px-5 hover:bg-blue-900 text-white rounded-full p-3 shadow-lg show" onclick="scrollBooks(this, -200)">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-
                 <!-- رف 2 -->
-                <div class="shelf-wrapper w-full md:w-1/2">
-                    <div class="books-slider pr-16 mr-2 ">
-                        <div class="book-card w-[140px]">
-                        <a href="#"><img src="img_book/book55.png" class="book-img " alt="كتاب 1"></a>
-                        </div>
-                        <div class="book-card w-[140px]">
-                        <a href="#"><img src="img_book/book66.jpg" class="book-img" alt="كتاب 2"></a>
-                        </div>
-                        <div class="book-card w-[140px]">
-                        <a href="#"><img src="img_book/book77.png" class="book-img" alt="كتاب 3"></a>
-                        </div>
-                        <div class="book-card w-[140px]">
-                        <a href="#"><img src="img_book/book88.jpg" class="book-img" alt="كتاب 3"></a>
-                        </div>
-                        
-                    </div>
-                    <img src="image/stand22.png" alt="رف الكتب" class="shelf-img mt-2">
-                </div>
-
-                <div class="nav-arrow nav-arrow-left bg-blue-800 px-5 hover:bg-blue-900 text-white rounded-full p-3 shadow-lg show" onclick="scrollBooks(this, 200)">
-                    <i class="fas fa-chevron-left"></i>
-                </div>
-                </div>
-
-                <!-- رف 3 -->
                 <div class="flex justify-center shelf-container">
                     <div class="nav-arrow nav-arrow-right bg-blue-800 px-5 hover:bg-blue-900 text-white rounded-full p-3 shadow-lg show" onclick="scrollBooks(this, -200)">
-                    <i class="fas fa-chevron-right"></i>
+                        <i class="fas fa-chevron-right"></i>
                     </div>
-                    
+
                     <div class="shelf-wrapper w-full md:w-1/2">
-                        <div class="books-slider pr-16 mr-2 ">
-                            <div class="book-card w-[140px]">
-                            <a href="#"><img src="img_book/book99.jpg" class="book-img " alt="كتاب 1"></a>
+                        <div class="books-slider pr-16 mr-2">
+                            <div class="book-card w-[140px] hover:cursor-pointer">
+                                <img src="img_book/book55.png" class="book-img" alt="كتاب 5" onclick="showBookInfo('book55')">
                             </div>
-                            <div class="book-card w-[140px]">
-                            <a href="#"><img src="img_book/book10.jpg" class="book-img" alt="كتاب 2"></a>
+                            <div class="book-card w-[140px] hover:cursor-pointer">
+                                <img src="img_book/book66.jpg" class="book-img" alt="كتاب 6" onclick="showBookInfo('book66')">
                             </div>
-                            <div class="book-card w-[140px]">
-                            <a href="#"><img src="img_book/book111.jpg" class="book-img" alt="كتاب 3"></a>
+                            <div class="book-card w-[140px] hover:cursor-pointer">
+                                <img src="img_book/book77.png" class="book-img" alt="كتاب 7" onclick="showBookInfo('book77')">
                             </div>
-                            <div class="book-card w-[140px]">
-                            <a href="#"><img src="img_book/book122.jpg" class="book-img" alt="كتاب 3"></a>
+                            <div class="book-card w-[140px] hover:cursor-pointer">
+                                <img src="img_book/book88.jpg" class="book-img" alt="كتاب 8" onclick="showBookInfo('book88')">
                             </div>
-                            
                         </div>
                         <img src="image/stand22.png" alt="رف الكتب" class="shelf-img mt-2">
                     </div>
 
                     <div class="nav-arrow nav-arrow-left bg-blue-800 px-5 hover:bg-blue-900 text-white rounded-full p-3 shadow-lg show" onclick="scrollBooks(this, 200)">
-                    <i class="fas fa-chevron-left"></i>
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+                <!-- رف 3 -->
+                <div class="flex justify-center shelf-container">
+                    <div class="nav-arrow nav-arrow-right bg-blue-800 px-5 hover:bg-blue-900 text-white rounded-full p-3 shadow-lg show" onclick="scrollBooks(this, -200)">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    
+                    <div class="shelf-wrapper w-full md:w-1/2">
+                        <div class="books-slider pr-16 mr-2">
+                            <div class="book-card w-[140px] hover:cursor-pointer">
+                                <img src="img_book/book99.jpg" class="book-img" alt="كتاب 9" onclick="showBookInfo('book99')">
+                            </div>
+                            <div class="book-card w-[140px] hover:cursor-pointer">
+                                <img src="img_book/book10.jpg" class="book-img" alt="كتاب 10" onclick="showBookInfo('book10')">
+                            </div>
+                            <div class="book-card w-[140px] hover:cursor-pointer">
+                                <img src="img_book/book111.jpg" class="book-img" alt="كتاب 11" onclick="showBookInfo('book111')">
+                            </div>
+                            <div class="book-card w-[140px] hover:cursor-pointer">
+                                <img src="img_book/book122.jpg" class="book-img" alt="كتاب 12" onclick="showBookInfo('book122')">
+                            </div>
+                        </div>
+                        <img src="image/stand22.png" alt="رف الكتب" class="shelf-img mt-2">
+                    </div>
+
+                    <div class="nav-arrow nav-arrow-left bg-blue-800 px-5 hover:bg-blue-900 text-white rounded-full p-3 shadow-lg show" onclick="scrollBooks(this, 200)">
+                        <i class="fas fa-chevron-left"></i>
                     </div>
                 </div>
             </div>
@@ -538,19 +778,33 @@ body.dark-mode #profile-modal .text-gray-500 {
             <div class="text-center mt-8">
                 <a href="categories.html" class="text-2xl text-blue-800 hover:text-blue-900 font-medium">عرض المزيد من الكتب <i class="fas fa-arrow-left mr-2"></i></a>
             </div>
-    </div>
+        </div>
     </section>
+
+    <!-- نافذة معلومات الكتاب المنبثقة -->
+    <div class="book-modal-overlay" id="bookModalOverlay">
+        <div class="book-modal">
+            <div class="close-modal" onclick="closeBookModal()">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="book-info" id="bookInfo">
+                <!-- محتوى معلومات الكتاب سيتم إضافته ديناميكيًا بواسطة JavaScript -->
+            </div>
+        </div>
+    </div>
 
 
     <!-- Categories Section -->
     <section class="py-12">
         <div class="container mx-auto px-4">
-            <div class="section-title-container">
-                <h2 class="section-title text-3xl text-gray-800 mr-4">
-                     المراحل
-                </h2>
-                <div class="section-title-line"></div>
-            </div>
+            <!-- عنوان قسم جديد ومحسن -->
+        <div class="section-title-container">
+            <div class="section-title-line-right"></div>
+            <h2 class="section-title text-3xl text-gray-800">
+                 المراحل
+            </h2>
+            <div class="section-title-line-left"></div>
+        </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <!-- Category Card 1 -->
@@ -607,14 +861,16 @@ body.dark-mode #profile-modal .text-gray-500 {
 
     <!-- MaSa AI Section -->
     <section class="py-12 bg-gray-100 relative overflow-hidden">
-        <!-- مكان للصورة الخلفية -->
-        <div class="absolute inset-0 z-0 opacity-20" id="background-image">
-            <!-- يمكنك إضافة الصورة الخلفية هنا لاحقًا -->
-        
-        </div>
-
         <div class="container mx-auto px-4 relative z-10">
-            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">تعرف على MaSa AI</h2>
+            <!-- عنوان قسم جديد ومحسن -->
+            <div class="section-title-container">
+                <div class="section-title-line-right"></div>
+                <h2 class="section-title text-3xl text-gray-800">
+                    أحدث الإضافات
+                </h2>
+                <div class="section-title-line-left"></div>
+            </div>
+
             <div class="flex flex-col md:flex-row items-center justify-between">
                 <div class="md:w-2/5 mb-8 md:mb-0 relative" id="robot-container">
                     <div class="robot-animation opacity-0 transform translate-y-16 transition-all duration-1000">
@@ -657,7 +913,7 @@ body.dark-mode #profile-modal .text-gray-500 {
     </section>
 
     <!-- Join Section -->
-    <section class="py-16 bg-blue-800 text-white">
+    <!-- <section class="py-16 bg-blue-800 text-white">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-4">انضم إلى مجتمع القراء لدينا</h2>
             <p class="text-lg mb-8 max-w-2xl mx-auto">سجل الآن للوصول إلى آلاف الكتب المجانية، وميزات متقدمة للقراءة، وحفظ تقدمك عبر الأجهزة المختلفة</p>
@@ -670,7 +926,7 @@ body.dark-mode #profile-modal .text-gray-500 {
                 </a>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-12">
@@ -709,9 +965,9 @@ body.dark-mode #profile-modal .text-gray-500 {
         </div>
     </footer>
 
-    <!-- <div class="loader-container">
+    <div class="loader-container">
         <img src="img_book/loader-img66.gif" class="h-[130px]"/>
-    </div> -->
+    </div>
 
     <!-- JavaScript -->
     <script>
@@ -720,8 +976,12 @@ body.dark-mode #profile-modal .text-gray-500 {
             // Mobile menu toggle functionality could be added here
         });
     </script>
+
+
+
     <script src="java.js"></script>
     <script src="auth.js"></script>
+    <script src="book_window.js"></script>
     
 </body>
 </html>

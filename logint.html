@@ -3,121 +3,445 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تأثير تفكيك وتجميع الصورة</title>
+    <title>مكتبة الكتب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        body {
+        /* تنسيق الأقسام والعناوين */
+        .section-title-container {
             display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        .section-title {
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        .section-title-line-right, .section-title-line-left {
+            height: 2px;
+            background-color: #3b82f6;
+            flex-grow: 1;
+            max-width: 100px;
+        }
+        
+        /* تنسيق رفوف الكتب */
+        .shelf-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .shelf-img {
+            width: 100%;
+            height: auto;
+        }
+        .books-slider {
+            display: flex;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding-bottom: 10px;
+        }
+        .book-card {
+            margin: 0 10px;
+            transition: transform 0.3s;
+        }
+        .book-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .book-img:hover {
+            transform: translateY(-10px);
+        }
+        
+        /* تنسيق أزرار التنقل */
+        .shelf-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .nav-arrow {
+            position: absolute;
+            z-index: 10;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-arrow-right {
+            right: 0;
+        }
+        .nav-arrow-left {
+            left: 0;
+        }
+        
+        /* تنسيق نافذة معلومات الكتاب */
+        .book-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 100;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background: #111;
-            margin: 0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
         }
-
-        .image-container {
-            width: 794px;
-            height: 419px;
+        .book-modal {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            padding: 25px;
             position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
         }
-
-        .tile {
+        .close-modal {
             position: absolute;
-            background-size: 794px 419px;
-            background-image: url('img_book/caver22.gif');
-            transition: all 1s ease-out;
-            box-shadow: 0 0 10px rgba(119, 0, 255, 0.5);
-            opacity: 0;
+            top: 15px;
+            left: 15px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #3b82f6;
         }
-
-        .tile:hover {
-            transform: scale(1.1) !important;
-            z-index: 100;
-            box-shadow: 0 0 20px rgb(48, 92, 222);
+        .book-info {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+        }
+        .book-image-container {
+            flex: 0 0 40%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .book-image-container img {
+            max-height: 350px;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .book-details-container {
+            flex: 0 0 60%;
+            display: flex;
+            flex-direction: column;
+        }
+        .book-rating {
+            color: #f59e0b;
+            font-size: 24px;
+            margin: 10px 0;
+        }
+        .download-btn {
+            margin-top: 20px;
+            background-color: #3b82f6;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            text-align: center;
+        }
+        .download-btn:hover {
+            background-color: #2563eb;
+        }
+        
+        /* تجاوب مع الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .book-info {
+                flex-direction: column;
+            }
+            .book-image-container, .book-details-container {
+                flex: 0 0 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="image-container" id="imageContainer"></div>
+    <!-- قسم أحدث الإضافات -->
+    <section class="py-12 ">
+        <div class="container mx-auto px-4">
+            <!-- عنوان القسم -->
+            <div class="section-title-container">
+                <div class="section-title-line-right"></div>
+                <h2 class="section-title text-3xl text-gray-800">
+                    أحدث الإضافات
+                </h2>
+                <div class="section-title-line-left"></div>
+            </div>
+
+            <!-- رف 1 -->
+            <div class="flex justify-center">
+                <div class="shelf-wrapper w-full md:w-1/2">
+                    <div class="books-slider pr-16 mr-2">
+                        <div class="book-card w-[140px]">
+                            <img src="img_book/book11.jpg" class="book-img" alt="كتاب 1" onclick="showBookInfo('book11')">
+                        </div>
+                        <div class="book-card w-[140px]">
+                            <img src="img_book/book22.jpg" class="book-img" alt="كتاب 2" onclick="showBookInfo('book22')">
+                        </div>
+                        <div class="book-card w-[140px]">
+                            <img src="img_book/book33.webp" class="book-img" alt="كتاب 3" onclick="showBookInfo('book33')">
+                        </div>
+                        <div class="book-card w-[140px]">
+                            <img src="img_book/book44.webp" class="book-img" alt="كتاب 4" onclick="showBookInfo('book44')">
+                        </div>
+                    </div>
+                    <img src="image/stand22.png" alt="رف الكتب" class="shelf-img mt-2">
+                </div>
+            </div>
+
+            <!-- رف 2,3 -->
+            <div class="flex" id="smrf">
+                <!-- رف 2 -->
+                <div class="flex justify-center shelf-container">
+                    <div class="nav-arrow nav-arrow-right bg-blue-800 px-5 hover:bg-blue-900 text-white rounded-full p-3 shadow-lg show" onclick="scrollBooks(this, -200)">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+
+                    <div class="shelf-wrapper w-full md:w-1/2">
+                        <div class="books-slider pr-16 mr-2">
+                            <div class="book-card w-[140px]">
+                                <img src="img_book/book55.png" class="book-img" alt="كتاب 5" onclick="showBookInfo('book55')">
+                            </div>
+                            <div class="book-card w-[140px]">
+                                <img src="img_book/book66.jpg" class="book-img" alt="كتاب 6" onclick="showBookInfo('book66')">
+                            </div>
+                            <div class="book-card w-[140px]">
+                                <img src="img_book/book77.png" class="book-img" alt="كتاب 7" onclick="showBookInfo('book77')">
+                            </div>
+                            <div class="book-card w-[140px]">
+                                <img src="img_book/book88.jpg" class="book-img" alt="كتاب 8" onclick="showBookInfo('book88')">
+                            </div>
+                        </div>
+                        <img src="image/stand22.png" alt="رف الكتب" class="shelf-img mt-2">
+                    </div>
+
+                    <div class="nav-arrow nav-arrow-left bg-blue-800 px-5 hover:bg-blue-900 text-white rounded-full p-3 shadow-lg show" onclick="scrollBooks(this, 200)">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+                <!-- رف 3 -->
+                <div class="flex justify-center shelf-container">
+                    <div class="nav-arrow nav-arrow-right bg-blue-800 px-5 hover:bg-blue-900 text-white rounded-full p-3 shadow-lg show" onclick="scrollBooks(this, -200)">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    
+                    <div class="shelf-wrapper w-full md:w-1/2">
+                        <div class="books-slider pr-16 mr-2">
+                            <div class="book-card w-[140px]">
+                                <img src="img_book/book99.jpg" class="book-img" alt="كتاب 9" onclick="showBookInfo('book99')">
+                            </div>
+                            <div class="book-card w-[140px]">
+                                <img src="img_book/book10.jpg" class="book-img" alt="كتاب 10" onclick="showBookInfo('book10')">
+                            </div>
+                            <div class="book-card w-[140px]">
+                                <img src="img_book/book111.jpg" class="book-img" alt="كتاب 11" onclick="showBookInfo('book111')">
+                            </div>
+                            <div class="book-card w-[140px]">
+                                <img src="img_book/book122.jpg" class="book-img" alt="كتاب 12" onclick="showBookInfo('book122')">
+                            </div>
+                        </div>
+                        <img src="image/stand22.png" alt="رف الكتب" class="shelf-img mt-2">
+                    </div>
+
+                    <div class="nav-arrow nav-arrow-left bg-blue-800 px-5 hover:bg-blue-900 text-white rounded-full p-3 shadow-lg show" onclick="scrollBooks(this, 200)">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="text-center mt-8">
+                <a href="categories.html" class="text-2xl text-blue-800 hover:text-blue-900 font-medium">عرض المزيد من الكتب <i class="fas fa-arrow-left mr-2"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- نافذة معلومات الكتاب المنبثقة -->
+    <div class="book-modal-overlay" id="bookModalOverlay">
+        <div class="book-modal">
+            <div class="close-modal" onclick="closeBookModal()">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="book-info" id="bookInfo">
+                <!-- محتوى معلومات الكتاب سيتم إضافته ديناميكيًا بواسطة JavaScript -->
+            </div>
+        </div>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const container = document.getElementById('imageContainer');
-            const imgWidth = 794;
-            const imgHeight = 419;
-            const tileSize = 100;  // زيادة حجم كل قطعة لتقليل العدد
-            let tiles = [];
-            let isScattered = false;
-
-            // إنشاء قطع الصورة
-            function createTiles() {
-                container.innerHTML = '';
-                tiles = [];
-
-                for (let y = 0; y < imgHeight; y += tileSize) {
-                    for (let x = 0; x < imgWidth; x += tileSize) {
-                        const tile = document.createElement('div');
-                        tile.className = 'tile';
-                        
-                        const width = Math.min(tileSize, imgWidth - x);
-                        const height = Math.min(tileSize, imgHeight - y);
-                        
-                        tile.style.width = `${width}px`;
-                        tile.style.height = `${height}px`;
-                        tile.style.backgroundPosition = `-${x}px -${y}px`;
-                        tile.style.left = `${x}px`;
-                        tile.style.top = `${y}px`;
-                        
-                        container.appendChild(tile);
-                        tiles.push(tile);
-                    }
-                }
+        // بيانات الكتب
+        const booksData = {
+            'book11': {
+                title: 'البرمجة بلغة ++C',
+                author: 'د.ياسر صادق ميطع',
+                rating: 4.5,
+                image: 'img_book/book11.jpg',
+                description: 'يعد هذا الكتاب مرجعاً شاملاً للطلاب والمهتمين بتعلم لغة البرمجة ++C، حيث يتناول الكتاب الأساسيات والمفاهيم المتقدمة في اللغة بأسلوب سلس ومُبسط. يحتوي الكتاب على أمثلة عملية وتطبيقات واقعية تساعد القارئ على فهم المفاهيم البرمجية وتطبيقها في مشاريع حقيقية.'
+            },
+            'book22': {
+                title: 'Opject-Oriented Programming in C++',
+                author: 'Nicolai M. Josuttis',
+                rating: 4.8,
+                image: 'img_book/book22.jpg',
+                description: 'يعتبر هذا الكتاب من أفضل المراجع العالمية في تعلم البرمجة كائنية التوجه باستخدام لغة ++C. يقدم المؤلف شرحاً تفصيلياً للمفاهيم الأساسية مثل الفئات والكائنات والوراثة وتعدد الأشكال والتغليف. الكتاب غني بالأمثلة التطبيقية التي تساعد المبرمجين على تطوير مهاراتهم في تصميم البرامج بأسلوب كائني التوجه.'
+            },
+            'book33': {
+                title: 'C++ من البداية إلى البرمجة الكيانية',
+                author: 'نضال خضير',
+                rating: 4.3,
+                image: 'img_book/book33.webp',
+                description: 'يتميز هذا الكتاب بأسلوبه السلس في تقديم لغة ++C باللغة العربية، حيث ينطلق بالقارئ من الصفر وحتى إتقان مفاهيم البرمجة كائنية التوجه. يحتوي الكتاب على تمارين وأمثلة عملية مشروحة خطوة بخطوة، مما يجعله مناسباً للمبتدئين والطلاب الذين يرغبون في تعلم اللغة بطريقة منهجية وسهلة.'
+            },
+            'book44': {
+                title: 'Machine Learning for Beginners',
+                author: 'Chris Sebastian',
+                rating: 4.2,
+                image: 'img_book/book44.webp',
+                description: 'يقدم هذا الكتاب مدخلاً سلساً لعالم تعلم الآلة، حيث يشرح المفاهيم الأساسية والخوارزميات الرئيسية بأسلوب مبسط يناسب المبتدئين. يتناول الكتاب مواضيع مثل الانحدار والتصنيف والتجميع والشبكات العصبية، مع أمثلة عملية تطبيقية باستخدام لغة بايثون والمكتبات الشائعة مثل Scikit-learn وTensorFlow.'
+            },
+            'book55': {
+                title: 'علوم الحاسوب من الألف إلى الياء',
+                author: 'Ian Wienand',
+                rating: 4.6,
+                image: 'img_book/book55.png',
+                description: 'يعد هذا الكتاب موسوعة شاملة في علوم الحاسوب، حيث يغطي مجموعة واسعة من المواضيع بدءاً من أساسيات الحوسبة والبرمجة وصولاً إلى المفاهيم المتقدمة مثل الذكاء الاصطناعي وأمن المعلومات والحوسبة السحابية. يتميز الكتاب بتقديم المعلومات بشكل منظم ومبسط، مما يجعله مرجعاً قيماً للطلاب والمهتمين بمجال علوم الحاسوب.'
+            },
+            'book66': {
+                title: 'أساسيات النظم الرقمية',
+                author: 'خالد بكرو',
+                rating: 4.4,
+                image: 'img_book/book66.jpg',
+                description: 'يتناول هذا الكتاب المفاهيم الأساسية في النظم الرقمية والإلكترونيات، حيث يشرح نظم العد المختلفة والبوابات المنطقية والدوائر التجميعية والتتابعية. يحتوي الكتاب على العديد من الأمثلة والتمارين التطبيقية التي تساعد على فهم المادة العلمية وترسيخها. مناسب للطلاب والمهندسين المهتمين بتصميم وتحليل الدوائر الرقمية.'
+            },
+            'book77': {
+                title: 'اكتشاف وتصحيح أخطاء تطبيقات #C',
+                author: 'مجتمع المبرمجين العرب',
+                rating: 4.1,
+                image: 'img_book/book77.png',
+                description: 'يقدم هذا الكتاب دليلاً عملياً لاكتشاف وتصحيح الأخطاء البرمجية في تطبيقات #C، حيث يتناول الأدوات والتقنيات المستخدمة في تتبع الأخطاء وإصلاحها. يحتوي الكتاب على أمثلة واقعية لمشاكل شائعة وكيفية حلها، بالإضافة إلى نصائح وإرشادات لكتابة شفرة برمجية خالية من الأخطاء وقابلة للصيانة.'
+            },
+            'book88': {
+                title: 'أخلاقيات الذكاء الاصطناعي',
+                author: 'مارك كوكلبير',
+                rating: 4.7,
+                image: 'img_book/book88.jpg',
+                description: 'يتناول هذا الكتاب القضايا الأخلاقية والاجتماعية المرتبطة بتطوير واستخدام تقنيات الذكاء الاصطناعي، حيث يناقش موضوعات مثل الخصوصية والتحيز والمساءلة والآثار الاقتصادية. يقدم الكتاب رؤى متعمقة حول كيفية تصميم وتطوير أنظمة ذكاء اصطناعي تراعي القيم الإنسانية وتعزز المصلحة العامة.'
+            },
+            'book99': {
+                title: 'Machine Learning Yearning',
+                author: 'Andrew Ng',
+                rating: 4.9,
+                image: 'img_book/book99.jpg',
+                description: 'يعد هذا الكتاب دليلاً عملياً لبناء وتطوير أنظمة تعلم الآلة، حيث يقدم أندرو نج خبرته العميقة في هذا المجال. يركز الكتاب على الجوانب العملية والاستراتيجيات الفعالة لتحسين أداء نماذج التعلم الآلي، مثل تقسيم البيانات وتحليل الأخطاء وتحديد اتجاه التطوير. يعتبر مرجعاً أساسياً للمهندسين والباحثين في مجال الذكاء الاصطناعي وتعلم الآلة.'
+            },
+            'book10': {
+                title: 'Artificial Intelligence',
+                author: 'David Brown',
+                rating: 4.3,
+                image: 'img_book/book10.jpg',
+                description: 'يقدم هذا الكتاب مقدمة شاملة لمجال الذكاء الاصطناعي، حيث يتناول المفاهيم الأساسية والتقنيات المستخدمة في بناء الأنظمة الذكية. يغطي الكتاب مواضيع متنوعة مثل البحث والاستدلال والتعلم وتمثيل المعرفة والرؤية الحاسوبية ومعالجة اللغات الطبيعية. يتميز بأسلوبه المبسط وأمثلته العملية التي تساعد على فهم المفاهيم المعقدة في هذا المجال.'
+            },
+            'book111': {
+                title: 'Machine Learning',
+                author: 'Jason Callaway',
+                rating: 4.5,
+                image: 'img_book/book111.jpg',
+                description: 'يعد هذا الكتاب مرجعاً متكاملاً في تعلم الآلة، حيث يشرح الأسس النظرية والتطبيقات العملية لمختلف خوارزميات التعلم الآلي. يتناول الكتاب التعلم الخاضع للإشراف وغير الخاضع للإشراف والتعلم المعزز، مع تقديم أمثلة تطبيقية باستخدام لغات برمجة مثل بايثون وR. يناسب الكتاب الطلاب والباحثين والمهندسين الراغبين في تعميق معرفتهم بهذا المجال.'
+            },
+            'book122': {
+                title: 'Artificial Intelligence',
+                author: 'Chris Neil',
+                rating: 4.4,
+                image: 'img_book/book122.jpg',
+                description: 'يستكشف هذا الكتاب الآفاق المستقبلية للذكاء الاصطناعي وتأثيره على مختلف جوانب الحياة البشرية، حيث يناقش التطورات التقنية الحديثة والتحديات المستقبلية. يتناول الكتاب مواضيع مثل التعلم العميق والروبوتات الذكية والأنظمة المستقلة، مع تقديم رؤى حول كيفية تسخير قوة الذكاء الاصطناعي لخدمة البشرية وحل المشكلات العالمية.'
             }
+        };
 
-            // تفكيك القطع
-            function scatterTiles() {
-                tiles.forEach((tile, index) => {
-                    const angle = Math.random() * Math.PI * 2;
-                    const distance = 100 + Math.random() * 150;
-                    
-                    tile.style.opacity = '1';
-                    tile.style.transform = `
-                        translate(
-                            ${Math.cos(angle) * distance}px,
-                            ${Math.sin(angle) * distance}px
-                        )
-                        rotate(${Math.random() * 360}deg)
-                    `;
-                });
-
-                isScattered = true;
-                setTimeout(reassembleTiles, 1000);  // وقت استرجاع سريع (1 ثانية)
+        // دالة لعرض معلومات الكتاب
+        function showBookInfo(bookId) {
+            const book = booksData[bookId];
+            if (!book) return;
+            
+            const bookInfoHTML = `
+                <div class="book-image-container overflow-hidden">
+                    <img src="${book.image}" alt="${book.title}" class="shadow-lg rounded-lg">
+                </div>
+                <div class="book-details-container">
+                    <h2 class="text-2xl max-w-sm font-bold text-gray-800">${book.title}</h2>
+                    <h3 class="text-xl text-gray-600 mt-2">${book.author}</h3>
+                    <div class="book-rating">
+                        ${getRatingStars(book.rating)}
+                        <span class="text-gray-600 text-lg mr-2">${book.rating}/5</span>
+                    </div>
+                    <div class="mt-4">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-2">نبذة عن الكتاب:</h4>
+                        <p class="max-w-sm text-gray-700 text-right leading-relaxed">${book.description}</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <button class="w-1/2 download-btn">
+                        قراءة وتحميل الكتاب
+                        </button>
+                    </div>    
+                </div>
+            `;
+            
+            document.getElementById('bookInfo').innerHTML = bookInfoHTML;
+            document.getElementById('bookModalOverlay').style.display = 'flex';
+            
+            // منع التمرير في الخلفية عند فتح النافذة المنبثقة
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // دالة لإنشاء نجوم التقييم
+        function getRatingStars(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 >= 0.5;
+            
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
             }
-
-            // إعادة تجميع القطع
-            function reassembleTiles() {
-                tiles.forEach((tile, index) => {
-                    setTimeout(() => {
-                        tile.style.transform = 'translate(0, 0) rotate(0deg)';
-                    }, index * 10);
-                });
-
-                isScattered = false;
-                setTimeout(() => {
-                    if (!isScattered) {
-                        // عرض الصورة كاملة لمدة أطول (5 ثواني)
-                        setTimeout(scatterTiles, 5000);
-                    }
-                }, 1500);
+            
+            if (halfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
             }
+            
+            const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+            
+            return stars;
+        }
+        
+        // دالة لإغلاق النافذة المنبثقة
+        function closeBookModal() {
+            document.getElementById('bookModalOverlay').style.display = 'none';
+            
+            // إعادة تفعيل التمرير في الخلفية عند إغلاق النافذة المنبثقة
+            document.body.style.overflow = 'auto';
+        }
+        
+        // دالة لتمرير الكتب في الرف
+        function scrollBooks(arrow, scrollAmount) {
+            const booksSlider = arrow.parentElement.querySelector('.books-slider');
+            booksSlider.scrollLeft -= scrollAmount;
+        }
 
-            // بدء الحركة
-            createTiles();
-            setTimeout(() => {
-                tiles.forEach(tile => tile.style.opacity = '1');
-                setTimeout(scatterTiles, 3000);  // عرض الصورة كاملة أولاً لمدة 3 ثواني
-            }, 500);
+        // إغلاق النافذة المنبثقة عند النقر خارجها
+        document.getElementById('bookModalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeBookModal();
+            }
         });
     </script>
 </body>

@@ -1,3 +1,28 @@
+ // تحريك العناصر عند التمرير
+ document.addEventListener('DOMContentLoaded', function() {
+    const elements = document.querySelectorAll('.fade-in, .slide-up, .slide-right');
+    
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+    
+    function handleScroll() {
+        elements.forEach(element => {
+            if (isElementInViewport(element)) {
+                element.style.animationPlayState = 'running';
+            }
+        });
+    }
+    
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // تشغيل عند تحميل الصفحة
+});
 
 // انتظر تحميل المستند بالكامل
 document.addEventListener('DOMContentLoaded', function() {
